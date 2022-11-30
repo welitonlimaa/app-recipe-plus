@@ -1,6 +1,8 @@
 const INITIAL_STATE = {
-  mealDB: '',
-  drinkDB: '',
+  mealDB: [],
+  drinkDB: [],
+  categorysDrink: [],
+  categorysMeal: [],
   isLoading: true,
 };
 
@@ -17,6 +19,8 @@ const dataApiReducer = (state = INITIAL_STATE, action) => {
       ...state,
       mealDB: action.payload.dataMeal,
       drinkDB: action.payload.dataDrink,
+      categorysDrink: action.payload.categorysDrink,
+      categorysMeal: action.payload.categorysMeal,
       isLoading: false,
     });
   }
