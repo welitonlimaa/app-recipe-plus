@@ -1,11 +1,15 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Header from './Header';
+// import PropTypes from 'prop-types';
 
 class Meals extends React.Component {
   render() {
     return (
-      <h1>Meals</h1>
+      <>
+        <Header />
+        <h1>Meals</h1>
+      </>
     );
   }
 }
