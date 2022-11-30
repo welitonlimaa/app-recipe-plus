@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   mealDB: '',
   drinkDB: '',
-  isLoading: false,
+  isLoading: true,
 };
 
 const dataApiReducer = (state = INITIAL_STATE, action) => {
