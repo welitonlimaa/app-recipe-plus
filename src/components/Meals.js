@@ -28,13 +28,15 @@ class Meals extends React.Component {
             ))
           }
         </div>
-        { reduceArray.map((meal, index) => (
-          <RecipeMealCard
-            key={ index }
-            id={ index }
-            dataMeal={ meal }
-          />
-        )) }
+        <div>
+          { reduceArray.map((meal, index) => (
+            <RecipeMealCard
+              key={ index }
+              id={ index }
+              dataMeal={ meal }
+            />
+          )) }
+        </div>
       </div>
     );
   }
