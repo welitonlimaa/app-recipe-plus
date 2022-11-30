@@ -1,17 +1,36 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import RecipeMealCard from './RecipeMealCard';
 
 class Meals extends React.Component {
   render() {
+    const { dataMeals } = this.props;
+
+    const num = 12;
+    const reduceArray = dataMeals.slice(0, num);
+
     return (
-      <h1>Meals</h1>
+      <div>
+        <h1>Meals</h1>
+        { reduceArray.map((meal, index) => (
+          <RecipeMealCard
+            key={ index }
+            id={ index }
+            dataMeal={ meal }
+          />
+        )) }
+      </div>
     );
   }
 }
 
-// Recipes.propTypes = {
-//   dispatch: PropTypes.func.isRequired,
-// };
+Meals.propTypes = {
+  dataMeals: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
+};
 
-export default connect()(Meals);
+const mapStateToProps = (state) => ({
+  dataMeals: state.dataApiReducer.mealDB,
+});
+
+export default connect(mapStateToProps)(Meals);
