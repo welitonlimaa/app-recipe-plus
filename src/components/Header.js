@@ -55,8 +55,14 @@ class Header extends React.Component {
     }
   };
 
+
+  redirectProfile = () => {
+    const { history } = this.props;
+    history.push('/profile');
+
   handleClick = () => {
     this.setState((oldState) => ({ renderSearchInput: !oldState.renderSearchInput }));
+
   };
 
   render() {
@@ -66,6 +72,7 @@ class Header extends React.Component {
         <h1 data-testid="page-title">{title}</h1>
         <button
           type="button"
+          onClick={ this.redirectProfile }
         >
           <img
             src={ profileIcon }
