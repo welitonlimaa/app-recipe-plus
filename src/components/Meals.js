@@ -1,9 +1,35 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import { fetchMealCategory, fetchResetDB } from '../redux/actions/dataApiActions';
 import RecipeMealCard from './RecipeMealCard';
 
 class Meals extends React.Component {
+  state = {
+    actualCategory: 'All',
+  };
+
+  getAllMeals = (category) => {
+    this.setState({
+      actualCategory: category,
+    });
+    const { dispatch } = this.props;
+    dispatch(fetchResetDB());
+  };
+
+  getByCategory = (category) => {
+    const { dispatch } = this.props;
+    const { actualCategory } = this.state;
+
+    this.setState({ actualCategory: category });
+
+    if (category === actualCategory) {
+      this.getAllMeals('All');
+    } else {
+      dispatch(fetchMealCategory(category));
+    }
+  };
+
   render() {
     const { dataMeals, categorys } = this.props;
 
@@ -11,15 +37,24 @@ class Meals extends React.Component {
       <div>
         <h1>Meals</h1>
         <div>
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ () => this.getAllMeals('All') }
+          >
+            All
+          </button>
           {
             categorys.map((category, index) => (
-              <span
+              <button
+                type="button"
                 key={ index }
                 data-testid={ `${category}-category-filter` }
+                onClick={ () => this.getByCategory(category) }
               >
                 {category}
                 {' '}
-              </span>
+              </button>
             ))
           }
         </div>
@@ -40,6 +75,7 @@ class Meals extends React.Component {
 Meals.propTypes = {
   dataMeals: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
   categorys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
