@@ -55,14 +55,13 @@ class Header extends React.Component {
     }
   };
 
-
   redirectProfile = () => {
     const { history } = this.props;
     history.push('/profile');
+  };
 
   handleClick = () => {
     this.setState((oldState) => ({ renderSearchInput: !oldState.renderSearchInput }));
-
   };
 
   render() {

@@ -3,7 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import RecipeMealCard from './RecipeMealCard';
 
-
 class Meals extends React.Component {
   render() {
     const { dataMeals, categorys } = this.props;
