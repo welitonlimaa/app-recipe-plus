@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import fetchAPIs from '../redux/actions/dataApiActions';
 import Meals from '../components/Meals';
 import Drinks from '../components/Drinks';
+import SearchBar from '../components/SearchBar';
 
 class Recipes extends React.Component {
   state = {
@@ -27,6 +28,7 @@ class Recipes extends React.Component {
     return (
       <div>
         <h1>Receitas</h1>
+        <SearchBar />
         { route === '/meals' ? <Meals /> : null}
         { route === '/drinks' ? <Drinks /> : null}
       </div>
