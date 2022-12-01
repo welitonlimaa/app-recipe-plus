@@ -1,5 +1,5 @@
-import fetchDrinkAPI from '../../services/drinkApi';
-import fetchMealAPI from '../../services/mealApi';
+import { fetchDrinkAPI, fetchCategoryDrink } from '../../services/drinkApi';
+import { fetchMealAPI, fetchCategoryMeal } from '../../services/mealApi';
 
 const requestAPI = () => ({
   type: 'REQUEST_API',
@@ -14,7 +14,9 @@ const fetchAPIs = () => async (dispatch) => {
   dispatch(requestAPI());
   const dataDrink = await fetchDrinkAPI();
   const dataMeal = await fetchMealAPI();
-  dispatch(insertDataAPI({ dataDrink, dataMeal }));
+  const categorysDrink = await fetchCategoryDrink();
+  const categorysMeal = await fetchCategoryMeal();
+  dispatch(insertDataAPI({ dataDrink, dataMeal, categorysDrink, categorysMeal }));
 };
 
 export default fetchAPIs;

@@ -1,17 +1,50 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import RecipeDrinkCard from './RecipeDrinkCard';
 
 class Drinks extends React.Component {
   render() {
+    const { dataDrinks, categorys } = this.props;
+
     return (
-      <h1>Drinks</h1>
+      <div>
+        <h1>Drinks</h1>
+        <div>
+          {
+            categorys.map((category, index) => (
+              <span
+                key={ index }
+                data-testid={ `${category}-category-filter` }
+              >
+                {category}
+                {' '}
+              </span>
+            ))
+          }
+        </div>
+        <div>
+          { dataDrinks.map((meal, index) => (
+            <RecipeDrinkCard
+              key={ index }
+              id={ index }
+              dataDrink={ meal }
+            />
+          )) }
+        </div>
+      </div>
     );
   }
 }
 
-// Recipes.propTypes = {
-//   dispatch: PropTypes.func.isRequired,
-// };
+Drinks.propTypes = {
+  dataDrinks: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
+  categorys: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
-export default connect()(Drinks);
+const mapStateToProps = (state) => ({
+  dataDrinks: state.dataApiReducer.drinkDB,
+  categorys: state.dataApiReducer.categorysDrink,
+});
+
+export default connect(mapStateToProps)(Drinks);

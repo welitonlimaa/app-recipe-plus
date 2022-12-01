@@ -20,6 +20,11 @@ class Recipes extends React.Component {
   }
 
   render() {
+    const { loading } = this.props;
+    console.log(loading);
+    if (loading === true) {
+      return (<h1>loading...</h1>);
+    }
     const { route } = this.state;
     const { history } = this.props;
     return (
@@ -42,6 +47,11 @@ Recipes.propTypes = {
     }),
     push: PropTypes.func,
   }).isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
-export default connect()(Recipes);
+const mapStateToProps = (state) => ({
+  loading: state.dataApiReducer.isLoading,
+});
+
+export default connect(mapStateToProps)(Recipes);
