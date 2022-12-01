@@ -7,17 +7,12 @@ class Meals extends React.Component {
   render() {
     const { dataMeals, categorys } = this.props;
 
-    const num = 12;
-    const reduceArray = dataMeals.slice(0, num);
-    const indexNum = 5;
-    const reduceCategorys = categorys.slice(0, indexNum);
-    console.log(reduceCategorys);
     return (
       <div>
         <h1>Meals</h1>
         <div>
           {
-            reduceCategorys.map((category, index) => (
+            categorys.map((category, index) => (
               <span
                 key={ index }
                 data-testid={ `${category}-category-filter` }
@@ -29,7 +24,7 @@ class Meals extends React.Component {
           }
         </div>
         <div>
-          { reduceArray.map((meal, index) => (
+          { dataMeals.map((meal, index) => (
             <RecipeMealCard
               key={ index }
               id={ index }
