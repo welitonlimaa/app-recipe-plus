@@ -5,6 +5,7 @@ import fetchAPIs from '../redux/actions/dataApiActions';
 import Meals from '../components/Meals';
 import Drinks from '../components/Drinks';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 class Recipes extends React.Component {
   state = {
@@ -34,6 +35,7 @@ class Recipes extends React.Component {
         /> }
         { route === '/meals' ? <Meals /> : null}
         { route === '/drinks' ? <Drinks /> : null}
+        { (route === ('/meals') || ('/drinks')) && <Footer /> }
       </div>
     );
   }
