@@ -24,6 +24,28 @@ const dataApiReducer = (state = INITIAL_STATE, action) => {
       isLoading: false,
     });
   }
+  case 'CHANGE_DATA_MEALS': {
+    return ({
+      ...state,
+      mealDB: action.payload,
+      isLoading: false,
+    });
+  }
+  case 'CHANGE_DATA_DRINKS': {
+    return ({
+      ...state,
+      drinkDB: action.payload,
+      isLoading: false,
+    });
+  }
+  case 'RESET_DB': {
+    return ({
+      ...state,
+      mealDB: action.payload.dataMeal,
+      drinkDB: action.payload.dataDrink,
+      isLoading: false,
+    });
+  }
   default:
     return state;
   }
