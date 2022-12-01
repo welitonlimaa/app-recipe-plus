@@ -3,11 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 class Header extends React.Component {
   state = {
     searchBtn: true,
     title: '',
+    renderSearchInput: false,
   };
 
   componentDidMount() {
@@ -53,13 +55,18 @@ class Header extends React.Component {
     }
   };
 
+
   redirectProfile = () => {
     const { history } = this.props;
     history.push('/profile');
+
+  handleClick = () => {
+    this.setState((oldState) => ({ renderSearchInput: !oldState.renderSearchInput }));
+
   };
 
   render() {
-    const { searchBtn, title } = this.state;
+    const { searchBtn, title, renderSearchInput } = this.state;
     return (
       <header>
         <h1 data-testid="page-title">{title}</h1>
@@ -75,7 +82,7 @@ class Header extends React.Component {
         </button>
         {
           searchBtn && (
-            <button type="button">
+            <button type="button" onClick={ this.handleClick }>
               <img
                 src={ searchIcon }
                 alt="Imagem do perfil"
@@ -84,6 +91,7 @@ class Header extends React.Component {
             </button>
           )
         }
+        {renderSearchInput && <SearchBar />}
       </header>
     );
   }
