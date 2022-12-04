@@ -1,6 +1,6 @@
-import { fetchDrinkAPI, fetchCategoryDrink, fetchByDrinkCategory }
+import { fetchDrinkAPI, fetchCategoryDrink, fetchByDrinkCategory, fetchDrinkRecipe }
   from '../../services/drinkApi';
-import { fetchMealAPI, fetchCategoryMeal, fetchByMealCategory }
+import { fetchMealAPI, fetchCategoryMeal, fetchByMealCategory, fetchMealRecipe }
   from '../../services/mealApi';
 
 const requestAPI = () => ({
@@ -24,6 +24,11 @@ const changeDataDrinks = (data) => ({
 
 const resetDB = (data) => ({
   type: 'RESET_DB',
+  payload: data,
+});
+
+const insertDataRecipe = (data) => ({
+  type: 'DATA_RECIPE',
   payload: data,
 });
 
@@ -52,4 +57,15 @@ export const fetchResetDB = () => async (dispatch) => {
   const dataDrink = await fetchDrinkAPI();
   const dataMeal = await fetchMealAPI();
   dispatch(resetDB({ dataDrink, dataMeal }));
+};
+
+export const fetchRecipeById = (id, category) => async (dispatch) => {
+  dispatch(requestAPI());
+  let data = [];
+  if (category === '/drink') {
+    data = await fetchDrinkRecipe(id);
+  } else {
+    data = await fetchMealRecipe(id);
+  }
+  dispatch(insertDataRecipe(data));
 };
