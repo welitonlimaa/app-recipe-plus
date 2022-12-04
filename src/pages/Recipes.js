@@ -6,6 +6,7 @@ import Meals from '../components/Meals';
 import Drinks from '../components/Drinks';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Loading from '../components/Loading';
 
 class Recipes extends React.Component {
   state = {
@@ -23,8 +24,8 @@ class Recipes extends React.Component {
   render() {
     const { loading } = this.props;
 
-    if (loading === true) {
-      return (<h1>loading...</h1>);
+    if (loading) {
+      return <Loading />;
     }
     const { route } = this.state;
     const { history } = this.props;
