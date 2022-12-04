@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   drinkDB: [],
   categorysDrink: [],
   categorysMeal: [],
+  recipe: [],
   isLoading: true,
 };
 
@@ -43,6 +44,13 @@ const dataApiReducer = (state = INITIAL_STATE, action) => {
       ...state,
       mealDB: action.payload.dataMeal,
       drinkDB: action.payload.dataDrink,
+      isLoading: false,
+    });
+  }
+  case 'DATA_RECIPE': {
+    return ({
+      ...state,
+      recipe: action.payload,
       isLoading: false,
     });
   }
