@@ -32,6 +32,11 @@ const insertDataRecipe = (data) => ({
   payload: data,
 });
 
+const insertSuggest = (data) => ({
+  type: 'DATA_SUGGEST',
+  payload: data,
+});
+
 const reduceData = (data) => {
   const num = 12;
   const reduceArray = data.slice(0, num);
@@ -39,41 +44,60 @@ const reduceData = (data) => {
 };
 
 export const fetchAPIs = () => async (dispatch) => {
-  dispatch(requestAPI());
   let dataDrink = await fetchDrinkAPI();
   dataDrink = reduceData(dataDrink);
   let dataMeal = await fetchMealAPI();
   dataMeal = reduceData(dataMeal);
   const categorysDrink = await fetchCategoryDrink();
   const categorysMeal = await fetchCategoryMeal();
+
   dispatch(insertDataAPI({ dataDrink, dataMeal, categorysDrink, categorysMeal }));
+  dispatch(requestAPI());
 };
 
 export const fetchMealCategory = (category) => async (dispatch) => {
-  // dispatch(requestAPI());
   const dataMeal = await fetchByMealCategory(category);
+
   dispatch(changeDataMeals(dataMeal));
+  dispatch(requestAPI());
 };
 
 export const fetchDrinkCategory = (category) => async (dispatch) => {
-  // dispatch(requestAPI());
   const dataDrink = await fetchByDrinkCategory(category);
+
   dispatch(changeDataDrinks(dataDrink));
+  dispatch(requestAPI());
 };
 
 export const fetchResetDB = () => async (dispatch) => {
-  const dataDrink = await fetchDrinkAPI();
-  const dataMeal = await fetchMealAPI();
+  let dataDrink = await fetchDrinkAPI();
+  dataDrink = reduceData(dataDrink);
+  let dataMeal = await fetchMealAPI();
+  dataMeal = reduceData(dataMeal);
+
   dispatch(resetDB({ dataDrink, dataMeal }));
+  dispatch(requestAPI());
 };
 
 export const fetchRecipeById = (id, category) => async (dispatch) => {
   dispatch(requestAPI());
-  let data = [];
   if (category === '/drink') {
-    data = await fetchDrinkRecipe(id);
+    const dataRecipe = await fetchDrinkRecipe(id);
+
+    dispatch(insertDataRecipe(dataRecipe));
+    dispatch(requestAPI());
   } else {
-    data = await fetchMealRecipe(id);
+    const dataRecipe = await fetchMealRecipe(id);
+
+    dispatch(insertDataRecipe(dataRecipe));
+    dispatch(requestAPI());
   }
-  dispatch(insertDataRecipe(data));
+};
+
+export const fetchSuggest = () => async (dispatch) => {
+  const dataDrink = await fetchDrinkAPI();
+  const dataMeal = await fetchMealAPI();
+
+  dispatch(insertSuggest({ dataDrink, dataMeal }));
+  dispatch(requestAPI());
 };

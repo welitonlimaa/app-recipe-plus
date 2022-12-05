@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAPIs } from '../redux/actions/dataApiActions';
+import { fetchAPIs } from '../redux/actions/Actions';
 import Meals from '../components/Meals';
 import Drinks from '../components/Drinks';
 import Header from '../components/Header';
@@ -54,7 +54,7 @@ Recipes.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.dataApiReducer.isLoading,
+  loading: state.allRecipesReducer.isLoading,
 });
 
 export default connect(mapStateToProps)(Recipes);

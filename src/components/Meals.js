@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchMealCategory, fetchResetDB } from '../redux/actions/dataApiActions';
+import { fetchMealCategory, fetchResetDB } from '../redux/actions/Actions';
 import RecipeMealCard from './RecipeMealCard';
 
 class Meals extends React.Component {
@@ -79,8 +79,8 @@ Meals.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  dataMeals: state.dataApiReducer.mealDB,
-  categorys: state.dataApiReducer.categorysMeal,
+  dataMeals: state.allRecipesReducer.mealDB,
+  categorys: state.allRecipesReducer.categorysMeal,
 });
 
 export default connect(mapStateToProps)(Meals);

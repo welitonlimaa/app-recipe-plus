@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchRecipeById } from '../redux/actions/dataApiActions';
+import { fetchRecipeById, fetchSuggest } from '../redux/actions/Actions';
 import Loading from '../components/Loading';
 
 class RecipeDetails extends React.Component {
@@ -14,6 +14,7 @@ class RecipeDetails extends React.Component {
     const { pathname } = history.location;
     const id = pathname.split('s/');
     dispatch(fetchRecipeById(id[1], id[0]));
+    dispatch(fetchSuggest());
 
     this.setState({ type: id[0] });
   }
@@ -59,8 +60,8 @@ RecipeDetails.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  recipe: state.dataApiReducer.recipe,
-  loading: state.dataApiReducer.isLoading,
+  recipe: state.recipeReducer.recipe,
+  loading: state.allRecipesReducer.isLoading,
 });
 
 export default connect(mapStateToProps)(RecipeDetails);
