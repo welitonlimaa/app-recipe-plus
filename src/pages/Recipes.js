@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAPIs } from '../redux/actions/Actions';
+import { fetchAPIs } from '../redux/actions/actions';
 import Meals from '../components/Meals';
 import Drinks from '../components/Drinks';
 import Header from '../components/Header';

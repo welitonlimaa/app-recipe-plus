@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchMealCategory, fetchResetDB } from '../redux/actions/Actions';
+import { fetchMealCategory, fetchResetDB } from '../redux/actions/actions';
 import RecipeMealCard from './RecipeMealCard';
 
 class Meals extends React.Component {

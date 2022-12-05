@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchRecipeById, fetchSuggest } from '../redux/actions/Actions';
+import { fetchRecipeById, fetchSuggest } from '../redux/actions/actions';
 import Loading from '../components/Loading';
 
 class RecipeDetails extends React.Component {
