@@ -32,10 +32,18 @@ const insertDataRecipe = (data) => ({
   payload: data,
 });
 
+const reduceData = (data) => {
+  const num = 12;
+  const reduceArray = data.slice(0, num);
+  return reduceArray;
+};
+
 export const fetchAPIs = () => async (dispatch) => {
   dispatch(requestAPI());
-  const dataDrink = await fetchDrinkAPI();
-  const dataMeal = await fetchMealAPI();
+  let dataDrink = await fetchDrinkAPI();
+  dataDrink = reduceData(dataDrink);
+  let dataMeal = await fetchMealAPI();
+  dataMeal = reduceData(dataMeal);
   const categorysDrink = await fetchCategoryDrink();
   const categorysMeal = await fetchCategoryMeal();
   dispatch(insertDataAPI({ dataDrink, dataMeal, categorysDrink, categorysMeal }));
