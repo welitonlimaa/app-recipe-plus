@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { renderWithR } from './helpers/renderWithRouter';
+import { renderWithRouterAndRedux } from './helpers/renderWithRouter';
 import Login from '../pages/Login';
 
 describe('Testa a página Login', () => {
@@ -8,17 +8,17 @@ describe('Testa a página Login', () => {
   const passwordB = 'password-input';
   const loginC = 'login-submit-btn';
   it('Testa se possui um email e senha válidos', () => {
-    renderWithR(<Login />);
+    renderWithRouterAndRedux(<Login />);
     const a = screen.getByTestId(emailA);
     const b = screen.getByTestId(passwordB);
     const button = screen.getByTestId(loginC);
-    userEvent.type(a, 'teste@gmail.com');
+    userEvent.type(a, 'teste@hotmail.com');
     expect(button).toBeDisabled();
     userEvent.type(b, '1234567');
     expect(button).not.toBeDisabled();
   });
   it('Testa os campos de email e senha e um botão funcional', () => {
-    renderWithR(<Login />);
+    renderWithRouterAndRedux(<Login />);
     const a = screen.getByTestId(emailA);
     expect(a).toBeInTheDocument();
     const b = screen.getByTestId(passwordB);
@@ -28,7 +28,7 @@ describe('Testa a página Login', () => {
     expect(button).toBeDisabled();
   });
   it('Testa se o usuário é redirecionado após login e senha válidos', async () => {
-    renderWithR(<Login />);
+    renderWithRouterAndRedux(<Login />);
     const a = screen.getByTestId(emailA);
     const b = screen.getByTestId(passwordB);
     const c = '{"email":"teste@hotmail.com"}';

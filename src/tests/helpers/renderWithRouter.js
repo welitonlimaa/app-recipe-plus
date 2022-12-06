@@ -1,30 +1,61 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
-import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
+import { applyMiddleware, createStore } from 'redux';
+import { render } from '@testing-library/react';
+import thunk from 'redux-thunk';
+import rootReducer from '../../redux/reducers/rootReducer';
 
-function renderWithRouter(tools, historyStore) {
+function withRouter(component, history) {
   return (
-    <Router history={ historyStore }>
-      { tools }
+    <Router history={ history }>
+      { component }
     </Router>
   );
 }
 
-export function renderWithRedux(tools, historyStore = {}) {
-  const { initialState = {}, localstore = createStore(rootReducer, initialState),
-  } = historyStore;
+function withRedux(component, store) {
+  return (
+    <Provider store={ store }>
+      { component }
+    </Provider>
+  );
+}
 
-  return { ...render(withRedux(tools, localstore)),
-    localstore,
+export function renderWithRouter(
+  component,
+  {
+    initialEntries = ['/'],
+    history = createMemoryHistory({ initialEntries }),
+  } = {},
+) {
+  return {
+    ...render(withRouter(component, history)),
+    history,
   };
 }
 
-export function renderWithR(
-  tools,
-  { entries = ['/'], historyStore = createMemoryHistory({ entries }) } = {},
-) {
-  return { ...render(renderWithRouter(tools, historyStore)),
-    historyStore,
+export function renderWithRedux(component, options = {}) {
+  const {
+    initialState = {},
+    store = createStore(rootReducer, initialState, applyMiddleware(thunk)),
+  } = options;
+
+  return {
+    ...render(withRedux(component, store)),
+    store,
+  };
+}
+
+export function renderWithRouterAndRedux(component, options = {}) {
+  const {
+    initialEntries = ['/'],
+    history = createMemoryHistory({ initialEntries }),
+  } = options;
+
+  return {
+    ...renderWithRedux(withRouter(component, history), options),
+    history,
   };
 }
