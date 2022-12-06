@@ -42,7 +42,7 @@ class Login extends React.Component {
           value={ email }
         />
         <input
-          type="text"
+          type="password"
           data-testid="password-input"
           name="password"
           value={ password }
