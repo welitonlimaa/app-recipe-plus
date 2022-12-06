@@ -5,6 +5,11 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 class Profile extends React.Component {
+  changeRoute = (route) => {
+    const { history } = this.props;
+    history.push(route);
+  };
+
   render() {
     const { history } = this.props;
     return (
@@ -12,7 +17,7 @@ class Profile extends React.Component {
         <Header
           history={ history }
         />
-        <Footer />
+        <Footer changeRoute={ this.changeRoute } />
       </>
     );
   }
