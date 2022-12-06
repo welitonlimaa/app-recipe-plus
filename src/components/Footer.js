@@ -1,29 +1,28 @@
 import React from 'react';
-import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 
 class Footer extends React.Component {
-  redirectBtn = () => (
-    <Switch>
-      <Route exact path="/" component={ <Redirect to="/drinks" /> } />
-    </Switch>
-
-  );
-
   render() {
+    const { changeRoute } = this.props;
     return (
       <footer data-testid="footer">
-        <Link to="/meals">
+        <button
+          type="button"
+          onClick={ () => changeRoute('/meals') }
+        >
           <img
             data-testid="meals-bottom-btn"
             src={ mealIcon }
             alt="Comidas"
           />
-        </Link>
-        <button type="button" onClick={ this.redirectBtn }>
+        </button>
+        <button
+          type="button"
+          onClick={ () => changeRoute('/drinks') }
+        >
           <img
             data-testid="drinks-bottom-btn"
             src={ drinkIcon }
@@ -41,6 +40,7 @@ Footer.propTypes = {
       pathname: PropTypes.string,
     }),
   }),
+  changeRoute: PropTypes.func.isRequired,
 }.isRequired;
 
 export default connect()(Footer);
