@@ -1,9 +1,7 @@
 export const fetchDrinkAPI = async () => {
   const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   const data = await response.json();
-  const num = 12;
-  const reduceArray = data.drinks.slice(0, num);
-  return reduceArray;
+  return data.drinks;
 };
 
 export const fetchCategoryDrink = async () => {
@@ -21,4 +19,10 @@ export const fetchByDrinkCategory = async (category) => {
   const num = 12;
   const reduceArray = data.drinks.slice(0, num);
   return reduceArray;
+};
+
+export const fetchDrinkRecipe = async (id) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const data = await response.json();
+  return data.drinks[0];
 };

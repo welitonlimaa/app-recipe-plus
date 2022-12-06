@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAPIs } from '../redux/actions/dataApiActions';
+import { fetchAPIs } from '../redux/actions/actions';
 import Meals from '../components/Meals';
 import Drinks from '../components/Drinks';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Loading from '../components/Loading';
 
 class Recipes extends React.Component {
   state = {
@@ -23,8 +24,8 @@ class Recipes extends React.Component {
   render() {
     const { loading } = this.props;
 
-    if (loading === true) {
-      return (<h1>loading...</h1>);
+    if (loading) {
+      return <Loading />;
     }
     const { route } = this.state;
     const { history } = this.props;
@@ -53,7 +54,7 @@ Recipes.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.dataApiReducer.isLoading,
+  loading: state.allRecipesReducer.isLoading,
 });
 
 export default connect(mapStateToProps)(Recipes);

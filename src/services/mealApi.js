@@ -1,9 +1,7 @@
 export const fetchMealAPI = async () => {
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const data = await response.json();
-  const num = 12;
-  const reduceArray = data.meals.slice(0, num);
-  return reduceArray;
+  return data.meals;
 };
 
 export const fetchCategoryMeal = async () => {
@@ -21,4 +19,10 @@ export const fetchByMealCategory = async (category) => {
   const num = 12;
   const reduceArray = data.meals.slice(0, num);
   return reduceArray;
+};
+
+export const fetchMealRecipe = async (id) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const data = await response.json();
+  return data.meals[0];
 };
