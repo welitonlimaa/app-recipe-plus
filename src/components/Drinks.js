@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchDrinkCategory, fetchResetDB } from '../redux/actions/actions';
 import RecipeDrinkCard from './RecipeDrinkCard';
+import RecipeNotFound from './RecipeNotFound';
 
 class Drinks extends React.Component {
   state = {
@@ -31,7 +32,18 @@ class Drinks extends React.Component {
   };
 
   render() {
-    const { dataDrinks, categorys } = this.props;
+    const { dataDrinks, categorys, redirectForRecipe } = this.props;
+
+    if (dataDrinks === null) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters');
+      return <RecipeNotFound />;
+    }
+
+    if (dataDrinks.length === 1) {
+      const id = dataDrinks[0].idDrink;
+      const route = `/drinks/${id}`;
+      redirectForRecipe(route);
+    }
 
     return (
       <div>
@@ -76,6 +88,7 @@ Drinks.propTypes = {
   dataDrinks: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
   categorys: PropTypes.arrayOf(PropTypes.string).isRequired,
   dispatch: PropTypes.func.isRequired,
+  redirectForRecipe: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

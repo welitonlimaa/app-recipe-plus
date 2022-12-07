@@ -124,11 +124,13 @@ export const fetchSuggest = () => async (dispatch) => {
 
 export const fetchSearchItems = (route, searchObject) => async (dispatch) => {
   if (route === '/meals') {
-    const searchRecipe = await fetchSearchMeals(searchObject);
+    let searchRecipe = await fetchSearchMeals(searchObject);
+    searchRecipe = searchRecipe !== null ? reduceData(searchRecipe) : null;
     dispatch(changeDataMeals(searchRecipe));
     dispatch(requestAPI());
   } else {
-    const searchRecipe = await fetchSearchDrinks(searchObject);
+    let searchRecipe = await fetchSearchDrinks(searchObject);
+    searchRecipe = searchRecipe !== null ? reduceData(searchRecipe) : null;
     dispatch(changeDataDrinks(searchRecipe));
     dispatch(requestAPI());
   }
