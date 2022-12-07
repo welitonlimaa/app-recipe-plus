@@ -35,7 +35,7 @@ class Drinks extends React.Component {
     const { dataDrinks, categorys, redirectForRecipe } = this.props;
 
     if (dataDrinks === null) {
-      global.alert('Sorry, we haven\'t found any recipes for these filters');
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
       return <RecipeNotFound />;
     }
 
