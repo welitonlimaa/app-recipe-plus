@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   categorysDrink: [],
   categorysMeal: [],
   isLoading: true,
+  history: '/',
 };
 
 const allRecipesReducer = (state = INITIAL_STATE, action) => {
@@ -21,6 +22,7 @@ const allRecipesReducer = (state = INITIAL_STATE, action) => {
       categorysDrink: action.payload.categorysDrink,
       categorysMeal: action.payload.categorysMeal,
       isLoading: false,
+      history: action.payload.history,
     });
   case 'CHANGE_DATA_MEALS':
     return ({
@@ -40,6 +42,11 @@ const allRecipesReducer = (state = INITIAL_STATE, action) => {
       mealDB: action.payload.dataMeal,
       drinkDB: action.payload.dataDrink,
       isLoading: false,
+    });
+  case 'UPDATE_ROUTE':
+    return ({
+      ...state,
+      history: action.payload,
     });
   default:
     return state;
