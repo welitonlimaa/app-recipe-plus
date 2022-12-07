@@ -26,3 +26,26 @@ export const fetchMealRecipe = async (id) => {
   const data = await response.json();
   return data.meals[0];
 };
+
+export const fetchSearchMeals = async ({ searchRadio, searchInput }) => {
+  switch (searchRadio) {
+  case 'name': {
+    const nameEndpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`;
+    const response = await fetch(nameEndpoint);
+    const data = await response.json();
+    return data.meals;
+  }
+  case 'First letter': {
+    const firstLetterEndpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchInput}`;
+    const response = await fetch(firstLetterEndpoint);
+    const data = await response.json();
+    return data.meals;
+  }
+  default: {
+    const ingredientEndpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInput}`;
+    const response = await fetch(ingredientEndpoint);
+    const data = await response.json();
+    return data.meals;
+  }
+  }
+};

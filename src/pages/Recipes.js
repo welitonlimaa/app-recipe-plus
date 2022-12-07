@@ -15,9 +15,9 @@ class Recipes extends React.Component {
 
   componentDidMount() {
     const { dispatch, history } = this.props;
-
     dispatch(fetchAPIs());
     const { pathname } = history.location;
+    dispatch(fetchAPIs(pathname));
     this.setState({ route: pathname });
   }
 
@@ -28,18 +28,15 @@ class Recipes extends React.Component {
   };
 
   render() {
-    const { loading } = this.props;
+    const { loading, history } = this.props;
 
     if (loading) {
       return <Loading />;
     }
     const { route } = this.state;
-    const { history } = this.props;
     return (
       <div>
-        { (route === ('/meals') || ('/drinks')) && <Header
-          history={ history }
-        /> }
+        { (route === ('/meals') || ('/drinks')) && <Header history={ history } /> }
         { route === '/meals' ? <Meals /> : null}
         { route === '/drinks' ? <Drinks /> : null}
         { (route === ('/meals') || ('/drinks')) && <Footer

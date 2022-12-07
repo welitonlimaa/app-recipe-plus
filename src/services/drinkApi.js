@@ -26,3 +26,26 @@ export const fetchDrinkRecipe = async (id) => {
   const data = await response.json();
   return data.drinks[0];
 };
+
+export const fetchSearchDrinks = async ({ searchRadio, searchInput }) => {
+  switch (searchRadio) {
+  case 'name': {
+    const nameEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchInput}`;
+    const response = await fetch(nameEndpoint);
+    const data = await response.json();
+    return data.drinks;
+  }
+  case 'First letter': {
+    const fLEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchInput}`;
+    const response = await fetch(fLEndpoint);
+    const data = await response.json();
+    return data.drinks;
+  }
+  default: {
+    const ingredientEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchInput}`;
+    const response = await fetch(ingredientEndpoint);
+    const data = await response.json();
+    return data.drinks;
+  }
+  }
+};

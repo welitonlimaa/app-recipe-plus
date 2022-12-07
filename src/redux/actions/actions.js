@@ -1,7 +1,17 @@
-import { fetchDrinkAPI, fetchCategoryDrink, fetchByDrinkCategory, fetchDrinkRecipe }
-  from '../../services/drinkApi';
-import { fetchMealAPI, fetchCategoryMeal, fetchByMealCategory, fetchMealRecipe }
-  from '../../services/mealApi';
+import {
+  fetchDrinkAPI,
+  fetchCategoryDrink,
+  fetchByDrinkCategory,
+  fetchDrinkRecipe,
+  fetchSearchDrinks,
+} from '../../services/drinkApi';
+import {
+  fetchMealAPI,
+  fetchCategoryMeal,
+  fetchByMealCategory,
+  fetchMealRecipe,
+  fetchSearchMeals,
+} from '../../services/mealApi';
 
 const requestAPI = () => ({
   type: 'REQUEST_API',
@@ -43,7 +53,12 @@ const reduceData = (data) => {
   return reduceArray;
 };
 
-export const fetchAPIs = () => async (dispatch) => {
+export const updateRoute = (payload) => ({
+  type: 'UPDATE_ROUTE',
+  payload,
+});
+
+export const fetchAPIs = (history) => async (dispatch) => {
   let dataDrink = await fetchDrinkAPI();
   dataDrink = reduceData(dataDrink);
   let dataMeal = await fetchMealAPI();
@@ -51,7 +66,12 @@ export const fetchAPIs = () => async (dispatch) => {
   const categorysDrink = await fetchCategoryDrink();
   const categorysMeal = await fetchCategoryMeal();
 
-  dispatch(insertDataAPI({ dataDrink, dataMeal, categorysDrink, categorysMeal }));
+  dispatch(insertDataAPI({
+    dataDrink,
+    dataMeal,
+    categorysDrink,
+    categorysMeal,
+    history }));
   dispatch(requestAPI());
 };
 
@@ -100,4 +120,16 @@ export const fetchSuggest = () => async (dispatch) => {
 
   dispatch(insertSuggest({ dataDrink, dataMeal }));
   dispatch(requestAPI());
+};
+
+export const fetchSearchItems = (route, searchObject) => async (dispatch) => {
+  if (route === '/meals') {
+    const searchRecipe = await fetchSearchMeals(searchObject);
+    dispatch(changeDataMeals(searchRecipe));
+    dispatch(requestAPI());
+  } else {
+    const searchRecipe = await fetchSearchDrinks(searchObject);
+    dispatch(changeDataDrinks(searchRecipe));
+    dispatch(requestAPI());
+  }
 };

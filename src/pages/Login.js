@@ -42,7 +42,7 @@ class Login extends React.Component {
           value={ email }
         />
         <input
-          type="text"
+          type="password"
           data-testid="password-input"
           name="password"
           value={ password }
@@ -64,6 +64,9 @@ class Login extends React.Component {
 Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
   }).isRequired,
 };
 
