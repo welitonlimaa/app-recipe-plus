@@ -49,7 +49,7 @@ export const fetchSearchDrinks = async ({ searchRadio, searchInput }) => {
       return null;
     }
   }
-  default: {
+  case 'ingredient': {
     try {
       const ingredientEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchInput}`;
       const response = await fetch(ingredientEndpoint);
@@ -59,5 +59,7 @@ export const fetchSearchDrinks = async ({ searchRadio, searchInput }) => {
       return null;
     }
   }
+  default:
+    return [];
   }
 };
