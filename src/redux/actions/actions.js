@@ -53,7 +53,10 @@ const reduceData = (data) => {
   return reduceArray;
 };
 
-export const updateRoute = () => {};
+export const updateRoute = (payload) => ({
+  type: 'UPDATE_ROUTE',
+  payload,
+});
 
 export const fetchAPIs = (history) => async (dispatch) => {
   let dataDrink = await fetchDrinkAPI();

@@ -22,7 +22,7 @@ class Recipes extends React.Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, history } = this.props;
 
     if (loading) {
       return <Loading />;
@@ -30,7 +30,7 @@ class Recipes extends React.Component {
     const { route } = this.state;
     return (
       <div>
-        { (route === ('/meals') || ('/drinks')) && <Header /> }
+        { (route === ('/meals') || ('/drinks')) && <Header history={ history } /> }
         { route === '/meals' ? <Meals /> : null}
         { route === '/drinks' ? <Drinks /> : null}
         { (route === ('/meals') || ('/drinks')) && <Footer /> }

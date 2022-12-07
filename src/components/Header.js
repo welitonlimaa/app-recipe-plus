@@ -18,9 +18,8 @@ class Header extends React.Component {
 
   returnTitle = () => {
     // Retorna titulo personalizado de acordo com a rota recebida.
-
-    const { actualRoute } = this.props;
-    switch (actualRoute) {
+    const { history: { location: { pathname } } } = this.props;
+    switch (pathname) {
     case '/meals':
       this.setState({
         searchBtn: true,
@@ -97,15 +96,12 @@ class Header extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  actualRoute: state.allRecipesReducer.history,
-});
-
 Header.propTypes = {
-  actualRoute: PropTypes.string.isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }),
+}.isRequired;
 
-export default connect(mapStateToProps)(Header);
+export default connect()(Header);

@@ -2,8 +2,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import { updateRoute } from '../redux/actions/actions';
 
 class FavoriteRecipes extends React.Component {
+  state = {
+    pathname: '/favorite-recipes',
+  };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    const { pathname } = this.state;
+    dispatch(updateRoute(pathname));
+  }
+
   render() {
     const { history } = this.props;
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchRecipeById, fetchSuggest } from '../redux/actions/actions';
+import { fetchRecipeById, fetchSuggest, updateRoute } from '../redux/actions/actions';
 import Loading from '../components/Loading';
 
 class RecipeDetails extends React.Component {
@@ -15,8 +15,8 @@ class RecipeDetails extends React.Component {
     const id = pathname.split('s/');
     dispatch(fetchRecipeById(id[1], id[0]));
     dispatch(fetchSuggest());
-
     this.setState({ type: id[0] });
+    dispatch(updateRoute(pathname));
   }
 
   // parametriza os nomes das variáveis de acordo o tipo se drink ou meal

@@ -43,6 +43,11 @@ const allRecipesReducer = (state = INITIAL_STATE, action) => {
       drinkDB: action.payload.dataDrink,
       isLoading: false,
     });
+  case 'UPDATE_ROUTE':
+    return ({
+      ...state,
+      history: action.payload,
+    });
   default:
     return state;
   }
