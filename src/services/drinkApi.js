@@ -30,22 +30,36 @@ export const fetchDrinkRecipe = async (id) => {
 export const fetchSearchDrinks = async ({ searchRadio, searchInput }) => {
   switch (searchRadio) {
   case 'name': {
-    const nameEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchInput}`;
-    const response = await fetch(nameEndpoint);
-    const data = await response.json();
-    return data.drinks;
+    try {
+      const nameEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchInput}`;
+      const response = await fetch(nameEndpoint);
+      const data = await response.json();
+      return data.drinks;
+    } catch (error) {
+      return null;
+    }
   }
   case 'First letter': {
-    const fLEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchInput}`;
-    const response = await fetch(fLEndpoint);
-    const data = await response.json();
-    return data.drinks;
+    try {
+      const fLEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchInput}`;
+      const response = await fetch(fLEndpoint);
+      const data = await response.json();
+      return data.drinks;
+    } catch (error) {
+      return null;
+    }
   }
-  default: {
-    const ingredientEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchInput}`;
-    const response = await fetch(ingredientEndpoint);
-    const data = await response.json();
-    return data.drinks;
+  case 'ingredient': {
+    try {
+      const ingredientEndpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchInput}`;
+      const response = await fetch(ingredientEndpoint);
+      const data = await response.json();
+      return data.drinks;
+    } catch (error) {
+      return null;
+    }
   }
+  default:
+    return [];
   }
 };

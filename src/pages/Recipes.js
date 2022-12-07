@@ -11,14 +11,16 @@ import Loading from '../components/Loading';
 class Recipes extends React.Component {
   state = {
     route: '/meals',
+    redirected: true,
   };
 
   componentDidMount() {
     const { dispatch, history } = this.props;
+    const { redirected } = this.state;
     dispatch(fetchAPIs());
     const { pathname } = history.location;
     dispatch(fetchAPIs(pathname));
-    this.setState({ route: pathname });
+    this.setState({ route: pathname, redirected: !redirected });
   }
 
   changeRoute = (route) => {
@@ -29,16 +31,20 @@ class Recipes extends React.Component {
 
   render() {
     const { loading, history } = this.props;
-
     if (loading) {
       return <Loading />;
     }
+
     const { route } = this.state;
     return (
       <div>
         { (route === ('/meals') || ('/drinks')) && <Header history={ history } /> }
-        { route === '/meals' ? <Meals /> : null}
-        { route === '/drinks' ? <Drinks /> : null}
+        { route === '/meals' ? <Meals
+          redirectForRecipe={ this.changeRoute }
+        /> : null}
+        { route === '/drinks' ? <Drinks
+          redirectForRecipe={ this.changeRoute }
+        /> : null}
         { (route === ('/meals') || ('/drinks')) && <Footer
           changeRoute={ this.changeRoute }
         /> }

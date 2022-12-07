@@ -30,22 +30,36 @@ export const fetchMealRecipe = async (id) => {
 export const fetchSearchMeals = async ({ searchRadio, searchInput }) => {
   switch (searchRadio) {
   case 'name': {
-    const nameEndpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`;
-    const response = await fetch(nameEndpoint);
-    const data = await response.json();
-    return data.meals;
+    try {
+      const nameEndpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`;
+      const response = await fetch(nameEndpoint);
+      const data = await response.json();
+      return data.meals;
+    } catch (error) {
+      return null;
+    }
   }
   case 'First letter': {
-    const firstLetterEndpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchInput}`;
-    const response = await fetch(firstLetterEndpoint);
-    const data = await response.json();
-    return data.meals;
+    try {
+      const firstLetterEndpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchInput}`;
+      const response = await fetch(firstLetterEndpoint);
+      const data = await response.json();
+      return data.meals;
+    } catch (error) {
+      return null;
+    }
   }
-  default: {
-    const ingredientEndpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInput}`;
-    const response = await fetch(ingredientEndpoint);
-    const data = await response.json();
-    return data.meals;
+  case 'ingredient': {
+    try {
+      const ingredientEndpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchInput}`;
+      const response = await fetch(ingredientEndpoint);
+      const data = await response.json();
+      return data.meals;
+    } catch (error) {
+      return null;
+    }
   }
+  default:
+    return [];
   }
 };
