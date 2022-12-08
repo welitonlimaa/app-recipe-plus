@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { fetchRecipeById, fetchSuggest, updateRoute } from '../redux/actions/actions';
 import Loading from '../components/Loading';
 import RecipeSuggestion from '../components/RecipeSuggestion';
+import ShareButton from '../components/ShareButton';
+import FavButton from '../components/FavButton';
 
 class RecipeDetails extends React.Component {
   state = {
@@ -48,6 +50,8 @@ class RecipeDetails extends React.Component {
       <div>
         <h1>{dataRecipe.title}</h1>
         <RecipeSuggestion />
+        <ShareButton />
+        <FavButton />
       </div>
     );
   }
