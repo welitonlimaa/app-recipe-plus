@@ -1,10 +1,11 @@
+import React from 'react';
 import { screen } from '@testing-library/react';
 import RecipeDrinkCard from '../components/RecipeDrinkCard';
 import mockDrinks from './helpers/mockDrinks';
 import renderWithRouterAndRedux from './helpers/renderWithRouter';
 
-describe('Testes da page Drinks', () => {
-  it('Verificar os elementos do Drink', async () => {
+describe('Testes para pagina Drinks', () => {
+  test('Verificar os elementos do Drink', async () => {
     renderWithRouterAndRedux(<RecipeDrinkCard />);
     const a = await screen.findByTestId('Ordinary Drink-category-filter');
     expect(a).toBeInTheDocument();
@@ -15,7 +16,7 @@ describe('Testes da page Drinks', () => {
     const c = await screen.findByTestId('Shake-category-filter');
     expect(c).toBeInTheDocument();
   });
-  it('Testa se renderiza os 12 recipe-cards', async () => { // X
+  test('Testa se renderiza os 12 recipe-cards', async () => { // X
     global.fetch = jest.fn(() => Promise.resolve({
       json: () => Promise.resolve(mockDrinks),
     }));
