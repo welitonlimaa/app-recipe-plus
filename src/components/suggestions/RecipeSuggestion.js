@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import MealSuggestionCard from './MealSuggestionCard';
 import DrinkSuggestionCard from './DrinkSuggestionCard';
 import '../../style/recipeSuggestion.css';
+import { fetchSuggest } from '../../redux/actions/actions';
 
 class RecipeSuggestion extends Component {
   state = {
@@ -12,23 +13,25 @@ class RecipeSuggestion extends Component {
   };
 
   componentDidMount() {
+    this.initProps();
+  }
+
+  initProps = async () => {
+    const { dispatch } = this.props;
+    await dispatch(fetchSuggest());
     const { mealsSuggestionArray, drinksSuggestionArray } = this.props;
     this.setState({
       mealsSuggestionArray,
       drinksSuggestionArray,
     });
-  }
+  };
 
   saveMealsSuggestionArray = () => {
     // pega o array de sugestão de comidas e faz uma lista dele
 
     const { mealsSuggestionArray } = this.state;
     const maxSuggestion = 6;
-
-    const randomInt = Math
-      .floor(Math.random() * (mealsSuggestionArray.length - maxSuggestion));
     const randomArray = mealsSuggestionArray
-      .filter((recipe, index) => (index >= randomInt))
       .filter((recipe, index) => (index < maxSuggestion));
     console.log(randomArray);
     return randomArray;
@@ -39,13 +42,8 @@ class RecipeSuggestion extends Component {
 
     const { drinksSuggestionArray } = this.state;
     const maxSuggestion = 6;
-
-    const randomInt = Math
-      .floor(Math.random() * (drinksSuggestionArray.length - maxSuggestion));
     const randomArray = drinksSuggestionArray
-      .filter((recipe, index) => (index >= randomInt))
       .filter((recipe, index) => (index < maxSuggestion));
-    console.log(randomArray);
     return randomArray;
   };
 
@@ -56,22 +54,21 @@ class RecipeSuggestion extends Component {
       <>
         <span>Sugestão de receitas</span>
         <div className="carrousel">
-          {route.split('/')[1] === 'meals' ? (
-            this.saveMealsSuggestionArray().map((recipe) => (
+          {route.split('/')[1] === 'drinks' ? (
+            this.saveMealsSuggestionArray().map((recipe, index) => (
               <MealSuggestionCard
                 dataMeal={ recipe }
-                id={ recipe.idMeal }
+                id={ index }
                 key={ recipe.idMeal }
-                className="content-recipe"
+                // className="content-recipe"
               />
             ))
           ) : (
-            this.saveDrinksSuggestionArray().map((recipe) => (
+            this.saveDrinksSuggestionArray().map((recipe, index) => (
               <DrinkSuggestionCard
                 dataDrink={ recipe }
-                id={ recipe.idDrink }
+                id={ index }
                 key={ recipe.idDrink }
-                className="content-recipe"
               />
             ))
           )}

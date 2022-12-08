@@ -8,9 +8,18 @@
   display: flex;
   flex-flow: nowrap;
   overflow-x: auto;
-  width: 100%;
+  width: 360px;
 }
 
 .content-recipe {
-  width: 50%;
+  border: black 1px solid;
+  width: 180px;
+}
+
+.content-recipe img {
+  width: 150px;
+}
+
+.content-recipe img:hover {
+  width: 160px;
 }

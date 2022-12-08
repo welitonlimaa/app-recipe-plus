@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../style/recipeSuggestion.css';
 
 class DrinkSuggestionCard extends React.Component {
   render() {
@@ -8,8 +9,15 @@ class DrinkSuggestionCard extends React.Component {
     const { strDrinkThumb, strDrink, idDrink } = dataDrink;
     return (
       <Link to={ `/drinks/${idDrink}` }>
-        <div className="recipe-card" data-testid={ `${id}-recommendation-card` }>
-          <img src={ strDrinkThumb } alt={ strDrink } data-testid={ `${id}-card-img` } />
+        <div
+          data-testid={ `${id}-recommendation-card` }
+          className="content-recipe"
+        >
+          <img
+            src={ strDrinkThumb }
+            alt={ strDrink }
+            data-testid={ `${id}-card-img` }
+          />
           <p data-testid={ `${id}-recommendation-title` }>{strDrink}</p>
         </div>
       </Link>
