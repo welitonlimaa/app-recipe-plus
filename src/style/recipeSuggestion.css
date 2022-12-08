@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.carrousel {
+  border: black 1px solid;
+  display: flex;
+  flex-flow: nowrap;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.content-recipe {
+  width: 50%;
+}
