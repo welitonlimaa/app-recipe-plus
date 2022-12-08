@@ -35,7 +35,6 @@ class IngredientsList extends React.Component {
 }
 
 IngredientsList.propTypes = {
-  history: PropTypes.any,
   recipe: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
