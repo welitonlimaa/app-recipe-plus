@@ -12,16 +12,17 @@ class RecipeSuggestion extends Component {
   };
 
   componentDidMount() {
+    const { mealsSuggestionArray, drinksSuggestionArray } = this.props;
     this.setState({
-      mealsSuggestionArray: this.saveMealsSuggestionArray(),
-      drinksSuggestionArray: this.saveDrinksSuggestionArray(),
+      mealsSuggestionArray,
+      drinksSuggestionArray,
     });
   }
 
   saveMealsSuggestionArray = () => {
     // pega o array de sugestão de comidas e faz uma lista dele
 
-    const { mealsSuggestionArray } = this.props;
+    const { mealsSuggestionArray } = this.state;
     const maxSuggestion = 6;
 
     const randomInt = Math
@@ -36,7 +37,7 @@ class RecipeSuggestion extends Component {
   saveDrinksSuggestionArray = () => {
     // pega o array de sugestão de comidas e faz uma lista dele
 
-    const { drinksSuggestionArray } = this.props;
+    const { drinksSuggestionArray } = this.state;
     const maxSuggestion = 6;
 
     const randomInt = Math
@@ -49,14 +50,14 @@ class RecipeSuggestion extends Component {
   };
 
   render() {
-    const { mealsSuggestionArray, drinksSuggestionArray } = this.state;
+    // const { mealsSuggestionArray, drinksSuggestionArray } = this.state;
     const { route } = this.props;
     return (
       <>
         <span>Sugestão de receitas</span>
         <div className="carrousel">
-          {route === '/meals' ? (
-            mealsSuggestionArray.map((recipe) => (
+          {route.split('/')[1] === 'meals' ? (
+            this.saveMealsSuggestionArray().map((recipe) => (
               <MealSuggestionCard
                 dataMeal={ recipe }
                 id={ recipe.idMeal }
@@ -65,7 +66,7 @@ class RecipeSuggestion extends Component {
               />
             ))
           ) : (
-            drinksSuggestionArray.map((recipe) => (
+            this.saveDrinksSuggestionArray().map((recipe) => (
               <DrinkSuggestionCard
                 dataDrink={ recipe }
                 id={ recipe.idDrink }
@@ -81,6 +82,7 @@ class RecipeSuggestion extends Component {
 }
 
 RecipeSuggestion.propTypes = {
+  route: PropTypes.string.isRequired,
   mealsSuggestionArray: PropTypes.arrayOf.isRequired,
   drinksSuggestionArray: PropTypes.arrayOf.isRequired,
 };
