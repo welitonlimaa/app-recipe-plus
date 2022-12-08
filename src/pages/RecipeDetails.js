@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchRecipeById, fetchSuggest, updateRoute } from '../redux/actions/actions';
 import Loading from '../components/Loading';
+import RecipeSuggestion from '../components/RecipeSuggestion';
 
 class RecipeDetails extends React.Component {
   state = {
@@ -43,7 +44,12 @@ class RecipeDetails extends React.Component {
     const dataRecipe = this.variablePattern();
     console.log(dataRecipe);
 
-    return (<h1>{dataRecipe.title}</h1>);
+    return (
+      <div>
+        <h1>{dataRecipe.title}</h1>
+        <RecipeSuggestion />
+      </div>
+    );
   }
 }
 
