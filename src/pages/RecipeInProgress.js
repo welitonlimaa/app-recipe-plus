@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ShareButton from '../components/ShareButton';
+import FavButton from '../components/FavButton';
 
 class RecipeInProgress extends React.Component {
   state = {
@@ -31,11 +33,40 @@ class RecipeInProgress extends React.Component {
   };
 
   render() {
+    const { recipe } = this.props;
     const { route, id } = this.state;
     console.log(route, id);
     const dataRecipe = this.variablePattern();
 
-    return (<h1>{dataRecipe.title}</h1>);
+    return (
+      <div>
+        <ShareButton />
+        <FavButton />
+        <h1 data-testid="recipe-title">{dataRecipe.title}</h1>
+        <img
+          src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
+          alt="Foto da receita"
+          width="300px"
+          height="300px"
+          data-testid="recipe-photo"
+        />
+        { route.includes('drinks')
+          ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
+          : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
+        {/* <IngredientsList history={ history } /> */}
+        <section>
+          <h3>Instruções</h3>
+          <p data-testid="instructions">{recipe.strInstructions}</p>
+        </section>
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+        >
+          Finish Recipe
+        </button>
+
+      </div>
+    );
   }
 }
 

@@ -1,9 +1,9 @@
-#start-recipe-btn {
-  position: fixed;
-  bottom: 0px;
-}
-
 .recipe-card img {
   width: 150px;
+}
+
+#start-recipe-btn {
+  bottom: 0;
+  position: fixed;
 }
 
