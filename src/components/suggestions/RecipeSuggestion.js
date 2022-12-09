@@ -79,9 +79,10 @@ class RecipeSuggestion extends Component {
 }
 
 RecipeSuggestion.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  drinksSuggestionArray: PropTypes.arrayOf().isRequired,
+  mealsSuggestionArray: PropTypes.arrayOf().isRequired,
   route: PropTypes.string.isRequired,
-  mealsSuggestionArray: PropTypes.arrayOf.isRequired,
-  drinksSuggestionArray: PropTypes.arrayOf.isRequired,
 };
 
 const mapStateToProps = ({ recipeReducer, allRecipesReducer }) => ({
