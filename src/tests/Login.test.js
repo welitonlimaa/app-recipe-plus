@@ -1,41 +1,43 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { renderWithR } from './helpers/renderWithRouter';
-import Login from '../pages/Login';
+import renderWithRouterAndRedux from './helpers/renderWithRouter';
+import App from '../App';
 
-describe('Testa a página Login', () => {
-  const emailA = 'email-input';
-  const passwordB = 'password-input';
-  const loginC = 'login-submit-btn';
-  it('Testa se possui um email e senha válidos', () => {
-    renderWithR(<Login />);
-    const a = screen.getByTestId(emailA);
-    const b = screen.getByTestId(passwordB);
-    const button = screen.getByTestId(loginC);
-    userEvent.type(a, 'teste@gmail.com');
-    expect(button).toBeDisabled();
-    userEvent.type(b, '1234567');
-    expect(button).not.toBeDisabled();
+describe('Testes para pagina Login', () => {
+  const dataTestIdEmail = 'email-input';
+  const dataTestIdPassword = 'password-input';
+  const emailTest = 'test@test.com';
+
+  test('testa se a pagina Login esta na rota /', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    const { pathname } = history.location;
+    expect(pathname).toEqual('/');
   });
-  it('Testa os campos de email e senha e um botão funcional', () => {
-    renderWithR(<Login />);
-    const a = screen.getByTestId(emailA);
-    expect(a).toBeInTheDocument();
-    const b = screen.getByTestId(passwordB);
-    expect(b).toBeInTheDocument();
-    const button = screen.getByTestId(loginC);
-    expect(button).toBeInTheDocument();
-    expect(button).toBeDisabled();
+  test('testa se a pagina contem os inputs de Email e Senha', () => {
+    renderWithRouterAndRedux(<App />);
+    const emailInput = screen.getByTestId(dataTestIdEmail);
+    const passowordInput = screen.getByTestId(dataTestIdPassword);
+    expect(passowordInput).toBeInTheDocument();
+    expect(emailInput).toBeInTheDocument();
   });
-  it('Testa se o usuário é redirecionado após login e senha válidos', async () => {
-    renderWithR(<Login />);
-    const a = screen.getByTestId(emailA);
-    const b = screen.getByTestId(passwordB);
-    const c = '{"email":"teste@hotmail.com"}';
-    const button = screen.getByTestId(loginC);
-    userEvent.type(a, 'teste@hotmail.com');
-    userEvent.type(b, '1234567');
-    userEvent.click(button);
-    expect(localStorage.getItem('user')).toBe(c);
+  test('testa se o botão esta desativado caso a validação de email não seja correspondente', () => {
+    renderWithRouterAndRedux(<App />);
+    const inputEmail = screen.getByTestId(dataTestIdEmail);
+    const inputSenha = screen.getByTestId(dataTestIdPassword);
+    userEvent.type(inputEmail, 'test@a');
+    userEvent.type(inputSenha, 'AWSD');
+    const loginButton = screen.getByRole('button', { name: 'Enter' });
+    expect(loginButton).toBeDisabled();
+  });
+  test('testa se as validações de senha e email estão funcionando', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    const inputEmail = screen.getByTestId(dataTestIdEmail);
+    const inputSenha = screen.getByTestId(dataTestIdPassword);
+    const loginButton = screen.getByRole('button', { name: 'Enter' });
+    userEvent.type(inputEmail, emailTest);
+    userEvent.type(inputSenha, '1234567');
+    expect(loginButton).toBeEnabled();
+    userEvent.click(loginButton);
+    expect(history.location.pathname).toEqual('/meals');
   });
 });

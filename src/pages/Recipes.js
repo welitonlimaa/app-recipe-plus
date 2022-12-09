@@ -30,16 +30,20 @@ class Recipes extends React.Component {
 
   render() {
     const { loading, history } = this.props;
-
     if (loading) {
       return <Loading />;
     }
+
     const { route } = this.state;
     return (
       <div>
         { (route === ('/meals') || ('/drinks')) && <Header history={ history } /> }
-        { route === '/meals' ? <Meals /> : null}
-        { route === '/drinks' ? <Drinks /> : null}
+        { route === '/meals' ? <Meals
+          redirectForRecipe={ this.changeRoute }
+        /> : null}
+        { route === '/drinks' ? <Drinks
+          redirectForRecipe={ this.changeRoute }
+        /> : null}
         { (route === ('/meals') || ('/drinks')) && <Footer
           changeRoute={ this.changeRoute }
         /> }

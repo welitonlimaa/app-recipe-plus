@@ -59,12 +59,19 @@ export const updateRoute = (payload) => ({
 });
 
 export const fetchAPIs = (history) => async (dispatch) => {
-  let dataDrink = await fetchDrinkAPI();
-  dataDrink = reduceData(dataDrink);
-  let dataMeal = await fetchMealAPI();
-  dataMeal = reduceData(dataMeal);
-  const categorysDrink = await fetchCategoryDrink();
-  const categorysMeal = await fetchCategoryMeal();
+  let dataDrink = [];
+  let dataMeal = [];
+  let categorysDrink = [];
+  let categorysMeal = [];
+  if (history === '/drinks') {
+    dataDrink = await fetchDrinkAPI();
+    dataDrink = reduceData(dataDrink);
+    categorysDrink = await fetchCategoryDrink();
+  } else {
+    dataMeal = await fetchMealAPI();
+    dataMeal = reduceData(dataMeal);
+    categorysMeal = await fetchCategoryMeal();
+  }
 
   dispatch(insertDataAPI({
     dataDrink,
@@ -124,11 +131,13 @@ export const fetchSuggest = () => async (dispatch) => {
 
 export const fetchSearchItems = (route, searchObject) => async (dispatch) => {
   if (route === '/meals') {
-    const searchRecipe = await fetchSearchMeals(searchObject);
+    let searchRecipe = await fetchSearchMeals(searchObject);
+    searchRecipe = searchRecipe !== null ? reduceData(searchRecipe) : null;
     dispatch(changeDataMeals(searchRecipe));
     dispatch(requestAPI());
   } else {
-    const searchRecipe = await fetchSearchDrinks(searchObject);
+    let searchRecipe = await fetchSearchDrinks(searchObject);
+    searchRecipe = searchRecipe !== null ? reduceData(searchRecipe) : null;
     dispatch(changeDataDrinks(searchRecipe));
     dispatch(requestAPI());
   }
