@@ -2,7 +2,7 @@
   width: 150px;
 }
 
-#start-btn {
+.startbtn {
   bottom: 0;
   position: fixed;
 }

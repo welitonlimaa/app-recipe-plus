@@ -92,7 +92,7 @@ class RecipeDetails extends React.Component {
 
         <button
           type="button"
-          id="start-recipe-btn"
+          className="startbtn"
           data-testid="start-recipe-btn"
           onClick={ this.changeRoute }
         >
