@@ -11,16 +11,14 @@ import Loading from '../components/Loading';
 class Recipes extends React.Component {
   state = {
     route: '/meals',
-    redirected: true,
   };
 
   componentDidMount() {
     const { dispatch, history } = this.props;
-    const { redirected } = this.state;
     dispatch(fetchAPIs());
     const { pathname } = history.location;
     dispatch(fetchAPIs(pathname));
-    this.setState({ route: pathname, redirected: !redirected });
+    this.setState({ route: pathname });
   }
 
   changeRoute = (route) => {
