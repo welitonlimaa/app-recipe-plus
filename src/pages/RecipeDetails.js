@@ -39,6 +39,13 @@ class RecipeDetails extends React.Component {
     return data;
   };
 
+  changeRoute = () => {
+    const { route } = this.state;
+    const url = `${route}/in-progress`;
+    const { history } = this.props;
+    history.push(url);
+  };
+
   render() {
     const { loading, recipe, history } = this.props;
     const { route } = this.state;
@@ -47,10 +54,11 @@ class RecipeDetails extends React.Component {
     }
 
     const dataRecipe = this.variablePattern();
-    console.log(dataRecipe);
 
     return (
       <div>
+        <ShareButton />
+        <FavButton />
         <h1 data-testid="recipe-title">{dataRecipe.title}</h1>
         <img
           src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
@@ -81,8 +89,16 @@ class RecipeDetails extends React.Component {
           />
         }
         <RecipeSuggestion />
-        <ShareButton />
-        <FavButton />
+
+        <button
+          type="button"
+          id="start-recipe-btn"
+          data-testid="start-recipe-btn"
+          onClick={ this.changeRoute }
+        >
+          Start Recipe
+        </button>
+
       </div>
     );
   }
