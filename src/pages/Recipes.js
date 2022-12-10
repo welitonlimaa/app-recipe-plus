@@ -15,7 +15,6 @@ class Recipes extends React.Component {
 
   componentDidMount() {
     const { dispatch, history } = this.props;
-    dispatch(fetchAPIs());
     const { pathname } = history.location;
     dispatch(fetchAPIs(pathname));
     this.setState({ route: pathname });
