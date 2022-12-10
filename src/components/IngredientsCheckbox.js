@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 class IngredientsCheckbox extends React.Component {
   state = {
     ingredientsCheckded: [],
-    type: '',
-    idRecipe: '',
+    inProgress: {
+      drinks: {},
+      meals: {},
+    },
   };
 
   componentDidMount() {
@@ -14,39 +16,46 @@ class IngredientsCheckbox extends React.Component {
     const { pathname } = history.location;
     const id = pathname.split('/');
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const ingredientsCheckded = inProgress[id[1]][id[2]] ? inProgress[id[1]][id[2]] : [];
-    this.setState({ ingredientsCheckded, type: id[1], idRecipe: id[2] });
+    if (inProgress !== null) {
+      const ingredientsCheckded = inProgress[id[1]][id[2]] !== null
+      && inProgress[id[1]][id[2]] !== undefined
+        ? inProgress[id[1]][id[2]] : [];
+      this.setState({ ingredientsCheckded, inProgress });
+    }
   }
 
   checkIngredient = (ingred) => {
-    const { ingredientsCheckded, type, idRecipe } = this.state;
+    const { history } = this.props;
+    const { ingredientsCheckded, inProgress } = this.state;
     const status = ingredientsCheckded.length !== 0
-      ? ingredientsCheckded.some((value) => value === ingred) : null;
+      ? ingredientsCheckded.some((value) => value === ingred) : false;
     console.log(status);
-    if (status === false || status === null) {
+    if (status === false) {
       const newCheckdeds = [...ingredientsCheckded, ingred];
       this.setState({ ingredientsCheckded: newCheckdeds });
-      localStorage.setItem('inProgressRecipes', JSON.stringify({
-        [type]: { [idRecipe]: newCheckdeds },
-      }));
+      const { pathname } = history.location;
+      const id = pathname.split('/');
+      inProgress[id[1]][id[2]] = newCheckdeds;
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
     }
 
     if (status) {
       const newCheckdeds = ingredientsCheckded.filter((value) => value !== ingred);
       this.setState({ ingredientsCheckded: newCheckdeds });
-      localStorage.setItem('inProgressRecipes', JSON.stringify({
-        [type]: { [idRecipe]: newCheckdeds },
-      }));
+      const { pathname } = history.location;
+      const id = pathname.split('/');
+      inProgress[id[1]][id[2]] = newCheckdeds;
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
     }
   };
 
   isChecked = (ingred) => {
     const { ingredientsCheckded } = this.state;
+
     const status = ingredientsCheckded.length !== 0
-      ? ingredientsCheckded.some((value) => value === ingred) : null;
-    if (status) {
-      return status;
-    }
+      && ingredientsCheckded !== undefined && ingredientsCheckded !== null
+      ? ingredientsCheckded.some((value) => value === ingred) : false;
+
     return status;
   };
 
@@ -62,18 +71,19 @@ class IngredientsCheckbox extends React.Component {
       <ul>
         {ingredients.map((ingred, index) => {
           const status = this.isChecked(ingred);
+
           return (
             <li key={ index }>
               <label
                 htmlFor={ `ingrediente-${index}` }
                 data-testid={ `${index}-ingredient-step` }
-                className={ status ? 'ingred-checkded' : null }
+                className={ status ? 'ingred-checkded' : '' }
               >
                 <input
                   type="checkbox"
                   id={ `ingrediente-${index}` }
-                  onClick={ () => this.checkIngredient(ingred) }
-                  defaultChecked={ status }
+                  onChange={ () => this.checkIngredient(ingred) }
+                  checked={ status }
                 />
                 {ingred}
               </label>

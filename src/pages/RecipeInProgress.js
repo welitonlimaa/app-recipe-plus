@@ -18,6 +18,14 @@ class RecipeInProgress extends React.Component {
     const id = pathname.split('/');
     dispatch(fetchRecipeById(id[2], id[1]));
     this.setState({ type: id[1], route: pathname });
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(inProgress);
+    if (inProgress === null) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        drinks: {},
+        meals: {},
+      }));
+    }
   }
 
   variablePattern = () => {
