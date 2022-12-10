@@ -25,11 +25,12 @@ class IngredientsCheckbox extends React.Component {
   }
 
   checkIngredient = (ingred) => {
-    const { history } = this.props;
+    const { history, handleDisabled } = this.props;
     const { ingredientsCheckded, inProgress } = this.state;
+
     const status = ingredientsCheckded.length !== 0
       ? ingredientsCheckded.some((value) => value === ingred) : false;
-    console.log(status);
+
     if (status === false) {
       const newCheckdeds = [...ingredientsCheckded, ingred];
       this.setState({ ingredientsCheckded: newCheckdeds });
@@ -37,6 +38,7 @@ class IngredientsCheckbox extends React.Component {
       const id = pathname.split('/');
       inProgress[id[1]][id[2]] = newCheckdeds;
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+      handleDisabled(newCheckdeds);
     }
 
     if (status) {
@@ -46,6 +48,7 @@ class IngredientsCheckbox extends React.Component {
       const id = pathname.split('/');
       inProgress[id[1]][id[2]] = newCheckdeds;
       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+      handleDisabled(newCheckdeds);
     }
   };
 
@@ -112,6 +115,7 @@ IngredientsCheckbox.propTypes = {
     }),
     push: PropTypes.func,
   }).isRequired,
+  handleDisabled: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

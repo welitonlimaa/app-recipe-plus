@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchRecipeById } from '../redux/actions/actions';
 import ShareButton from '../components/ShareButton';
 import FavButton from '../components/FavButton';
@@ -10,6 +11,7 @@ class RecipeInProgress extends React.Component {
   state = {
     type: '',
     route: '',
+    isDisabled: true,
   };
 
   componentDidMount() {
@@ -19,14 +21,30 @@ class RecipeInProgress extends React.Component {
     dispatch(fetchRecipeById(id[2], id[1]));
     this.setState({ type: id[1], route: pathname });
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    // console.log(inProgress);
-    if (inProgress === null) {
+
+    if (inProgress === null || inProgress === undefined) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({
         drinks: {},
         meals: {},
       }));
+    } else {
+      this.handleDisabled(inProgress[id[1]][id[2]]);
     }
   }
+
+  handleDisabled = (ingredientsCheckded) => {
+    const { recipe } = this.props;
+    const ingredients = Object.keys(recipe)
+      .filter((key) => key.includes('strIngredient') && recipe[key])
+      .map((ingredient, index) => (
+        `${recipe[ingredient]} ${recipe[`strMeasure${index + 1}`]}`));
+
+    if (ingredientsCheckded.length === ingredients.length) {
+      this.setState({ isDisabled: false });
+    } else {
+      this.setState({ isDisabled: true });
+    }
+  };
 
   variablePattern = () => {
     const { type } = this.state;
@@ -44,8 +62,8 @@ class RecipeInProgress extends React.Component {
 
   render() {
     const { recipe, history } = this.props;
-    const { route } = this.state;
-    // console.log(type);
+    const { route, isDisabled } = this.state;
+
     const dataRecipe = this.variablePattern();
 
     return (
@@ -63,18 +81,20 @@ class RecipeInProgress extends React.Component {
         { route.includes('drinks')
           ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
           : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
-        <IngredientsCheckbox history={ history } />
+        <IngredientsCheckbox history={ history } handleDisabled={ this.handleDisabled } />
         <section>
           <h3>Instruções</h3>
           <p data-testid="instructions">{recipe.strInstructions}</p>
         </section>
-        <button
-          type="button"
-          data-testid="finish-recipe-btn"
-        >
-          Finish Recipe
-        </button>
-
+        <Link to="/done-recipes">
+          <button
+            type="button"
+            data-testid="finish-recipe-btn"
+            disabled={ isDisabled }
+          >
+            Finish Recipe
+          </button>
+        </Link>
       </div>
     );
   }
