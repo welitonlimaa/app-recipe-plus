@@ -33,7 +33,7 @@ class RecipeSuggestion extends Component {
     const maxSuggestion = 6;
     const randomArray = mealsSuggestionArray
       .filter((recipe, index) => (index < maxSuggestion));
-    console.log(randomArray);
+    // console.log(randomArray);
     return randomArray;
   };
 

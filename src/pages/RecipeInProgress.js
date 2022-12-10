@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fetchRecipeById } from '../redux/actions/actions';
 import ShareButton from '../components/ShareButton';
 import FavButton from '../components/FavButton';
+import IngredientsCheckbox from '../components/IngredientsCheckbox';
 
 class RecipeInProgress extends React.Component {
   state = {
     type: '',
     route: '',
-    id: '',
   };
 
   componentDidMount() {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
     const { pathname } = history.location;
-    const id = pathname.split('s/');
-    this.setState({ type: id[0], route: pathname, id: id[1] });
+    const id = pathname.split('/');
+    dispatch(fetchRecipeById(id[2], id[1]));
+    this.setState({ type: id[1], route: pathname });
   }
 
   variablePattern = () => {
@@ -33,9 +35,9 @@ class RecipeInProgress extends React.Component {
   };
 
   render() {
-    const { recipe } = this.props;
-    const { route, id } = this.state;
-    console.log(route, id);
+    const { recipe, history } = this.props;
+    const { route } = this.state;
+    // console.log(type);
     const dataRecipe = this.variablePattern();
 
     return (
@@ -53,7 +55,7 @@ class RecipeInProgress extends React.Component {
         { route.includes('drinks')
           ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
           : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
-        {/* <IngredientsList history={ history } /> */}
+        <IngredientsCheckbox history={ history } />
         <section>
           <h3>Instruções</h3>
           <p data-testid="instructions">{recipe.strInstructions}</p>
@@ -71,7 +73,7 @@ class RecipeInProgress extends React.Component {
 }
 
 RecipeInProgress.propTypes = {
-//   dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({
     location: PropTypes.shape({
       pathname: PropTypes.string,
