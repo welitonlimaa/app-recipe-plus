@@ -1,11 +1,10 @@
 import React from 'react';
+// import { act } from 'react-dom/test-utils';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndRedux from './helpers/renderWithRouter';
 import App from '../App';
 import SearchBar from '../components/SearchBar';
-// import mockMeals from './helpers/mockMeals';
-// import mockDrinks from './helpers/mockDrinks';
 
 describe('Testes para o componente SearchBar', () => {
   test(' Testa se o searchBar aparece ao clicar no button com a imagem da lupa', () => {

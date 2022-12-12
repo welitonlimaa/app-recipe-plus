@@ -67,31 +67,33 @@ class Header extends React.Component {
   render() {
     const { searchBtn, title, renderSearchInput } = this.state;
     return (
-      <header>
-        <h1 data-testid="page-title">{title}</h1>
-        <button
-          type="button"
-          onClick={ this.redirectProfile }
-        >
-          <img
-            src={ profileIcon }
-            alt="Imagem do perfil"
-            data-testid="profile-top-btn"
-          />
-        </button>
-        {
-          searchBtn && (
-            <button type="button" onClick={ this.handleClick }>
-              <img
-                src={ searchIcon }
-                alt="Imagem do perfil"
-                data-testid="search-top-btn"
-              />
-            </button>
-          )
-        }
-        {renderSearchInput && <SearchBar />}
-      </header>
+      <div>
+        <header>
+          <h1 data-testid="page-title">{title}</h1>
+          <button
+            type="button"
+            onClick={ this.redirectProfile }
+          >
+            <img
+              src={ profileIcon }
+              alt="Imagem do perfil"
+              data-testid="profile-top-btn"
+            />
+          </button>
+          {
+            searchBtn && (
+              <button type="button" onClick={ this.handleClick }>
+                <img
+                  src={ searchIcon }
+                  alt="Imagem do perfil"
+                  data-testid="search-top-btn"
+                />
+              </button>
+            )
+          }
+          {renderSearchInput && <SearchBar />}
+        </header>
+      </div>
     );
   }
 }
