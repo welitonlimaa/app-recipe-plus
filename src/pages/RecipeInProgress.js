@@ -27,8 +27,13 @@ class RecipeInProgress extends React.Component {
         drinks: {},
         meals: {},
       }));
-    } else {
+    } else if (inProgress[id[1]][id[2]]) {
       this.handleDisabled(inProgress[id[1]][id[2]]);
+    }
+
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipes === null || doneRecipes === undefined) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
     }
   }
 
@@ -46,16 +51,60 @@ class RecipeInProgress extends React.Component {
     }
   };
 
+  doneRecipe = (data) => {
+    const date = new Date();
+    const { id,
+      type,
+      category,
+      name,
+      alcoholicOrNot,
+      image,
+      strTags,
+      nationality } = data;
+
+    const tags = strTags === undefined || strTags === null ? [] : strTags.split(',');
+
+    const obj = {
+      id,
+      nationality,
+      name,
+      category,
+      type,
+      image,
+      tags,
+      alcoholicOrNot,
+      doneDate: date.toISOString(),
+    };
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes, obj]));
+  };
+
   variablePattern = () => {
     const { type } = this.state;
     const { recipe } = this.props;
     let data = {};
     if (type.includes('drink')) {
-      const { strDrink: title } = recipe;
-      data = { title };
+      const { idDrink: id, strCategory: category, strDrink: name,
+        strAlcoholic: alcoholicOrNot, strDrinkThumb: image, strTags } = recipe;
+      data = { id,
+        type: 'drink',
+        category,
+        name,
+        alcoholicOrNot,
+        image,
+        strTags,
+        nationality: '' };
     } else {
-      const { strMeal: title } = recipe;
-      data = { title };
+      const { idMeal: id, strCategory: category, strMeal: name,
+        strMealThumb: image, strTags, strArea } = recipe;
+      data = { id,
+        type: 'meal',
+        category,
+        name,
+        alcoholicOrNot: '',
+        image,
+        strTags,
+        nationality: strArea };
     }
     return data;
   };
@@ -70,7 +119,7 @@ class RecipeInProgress extends React.Component {
       <div>
         <ShareButton />
         <FavButton />
-        <h1 data-testid="recipe-title">{dataRecipe.title}</h1>
+        <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
         <img
           src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
           alt="Foto da receita"
@@ -91,6 +140,7 @@ class RecipeInProgress extends React.Component {
             type="button"
             data-testid="finish-recipe-btn"
             disabled={ isDisabled }
+            onClick={ () => this.doneRecipe(dataRecipe) }
           >
             Finish Recipe
           </button>
