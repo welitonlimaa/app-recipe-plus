@@ -59,12 +59,19 @@ export const updateRoute = (payload) => ({
 });
 
 export const fetchAPIs = (history) => async (dispatch) => {
-  let dataDrink = await fetchDrinkAPI();
-  dataDrink = reduceData(dataDrink);
-  let dataMeal = await fetchMealAPI();
-  dataMeal = reduceData(dataMeal);
-  const categorysDrink = await fetchCategoryDrink();
-  const categorysMeal = await fetchCategoryMeal();
+  let dataDrink = [];
+  let dataMeal = [];
+  let categorysDrink = [];
+  let categorysMeal = [];
+  if (history.includes('drink')) {
+    dataDrink = await fetchDrinkAPI();
+    dataDrink = reduceData(dataDrink);
+    categorysDrink = await fetchCategoryDrink();
+  } else {
+    dataMeal = await fetchMealAPI();
+    dataMeal = reduceData(dataMeal);
+    categorysMeal = await fetchCategoryMeal();
+  }
 
   dispatch(insertDataAPI({
     dataDrink,
@@ -101,7 +108,7 @@ export const fetchResetDB = () => async (dispatch) => {
 
 export const fetchRecipeById = (id, category) => async (dispatch) => {
   dispatch(requestAPI());
-  if (category === '/drink') {
+  if (category.includes('drink')) {
     const dataRecipe = await fetchDrinkRecipe(id);
 
     dispatch(insertDataRecipe(dataRecipe));

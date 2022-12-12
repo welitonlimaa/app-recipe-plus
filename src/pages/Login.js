@@ -24,7 +24,7 @@ class Login extends React.Component {
   handleClick = () => {
     const { email } = this.state;
     const { history } = this.props;
-    console.log({ email });
+    // console.log({ email });
     localStorage.setItem('user', JSON.stringify({ email }));
     history.push('/meals');
   };

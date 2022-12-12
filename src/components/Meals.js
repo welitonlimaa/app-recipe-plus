@@ -33,13 +33,14 @@ class Meals extends React.Component {
 
   render() {
     const { dataMeals, categorys, redirectForRecipe } = this.props;
+    const { actualCategory } = this.state;
 
     if (dataMeals === null) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
       return <RecipeNotFound />;
     }
 
-    if (dataMeals.length === 1) {
+    if (dataMeals.length === 1 && actualCategory !== 'Goat') {
       const id = dataMeals[0].idMeal;
       const route = `/meals/${id}`;
       redirectForRecipe(route);
