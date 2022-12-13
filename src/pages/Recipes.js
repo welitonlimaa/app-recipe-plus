@@ -34,14 +34,16 @@ class Recipes extends React.Component {
 
     const { route } = this.state;
     return (
-      <div>
+      <div className="container-fluid">
         { (route === ('/meals') || ('/drinks')) && <Header history={ history } /> }
-        { route === '/meals' ? <Meals
-          redirectForRecipe={ this.changeRoute }
-        /> : null}
-        { route === '/drinks' ? <Drinks
-          redirectForRecipe={ this.changeRoute }
-        /> : null}
+        <div className="content">
+          { route === '/meals' ? <Meals
+            redirectForRecipe={ this.changeRoute }
+          /> : null}
+          { route === '/drinks' ? <Drinks
+            redirectForRecipe={ this.changeRoute }
+          /> : null}
+        </div>
         { (route === ('/meals') || ('/drinks')) && <Footer
           changeRoute={ this.changeRoute }
         /> }

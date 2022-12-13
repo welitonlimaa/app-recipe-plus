@@ -15,11 +15,24 @@
   max-height: 80vh;
 }
 
-footer {
+.navbar {
+  background-color: red;
+}
+
+.content {
+  padding-bottom: 80px;
+}
+
+.footer {
+  background-color: blue;
+}
+
+
+/* footer {
   bottom: 0;
   padding: 0;
   position: fixed;
-}
+} */
 
 /*
 #iceLeft {
@@ -35,10 +48,10 @@ footer {
 }
 */
 
-.meals > .logo {
+.meals>.logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
-  font-family: Montserrat , sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 3em;
   font-weight: 900;
 }

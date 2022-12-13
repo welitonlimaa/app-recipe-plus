@@ -67,7 +67,7 @@ class Header extends React.Component {
   render() {
     const { searchBtn, title, renderSearchInput } = this.state;
     return (
-      <header>
+      <header className="navbar p-2">
         <h1 data-testid="page-title">{title}</h1>
         <button
           type="button"

@@ -47,9 +47,8 @@ class Meals extends React.Component {
     }
 
     return (
-      <div>
-        <h1>Meals</h1>
-        <div>
+      <div className="text-center">
+        <div className="d-flex justify-content-center flex-wrap mt-4">
           <button
             type="button"
             data-testid="All-category-filter"
@@ -71,7 +70,7 @@ class Meals extends React.Component {
             ))
           }
         </div>
-        <div>
+        <div className="d-flex justify-content-around flex-wrap mt-4">
           { dataMeals.map((meal, index) => (
             <RecipeMealCard
               key={ index }
