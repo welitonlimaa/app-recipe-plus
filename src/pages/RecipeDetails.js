@@ -30,11 +30,27 @@ class RecipeDetails extends React.Component {
     const { recipe } = this.props;
     let data = {};
     if (type.includes('drink')) {
-      const { strDrink: title } = recipe;
-      data = { title };
+      const { idDrink: id, strCategory: category, strDrink: name,
+        strAlcoholic: alcoholicOrNot, strDrinkThumb: image, strTags } = recipe;
+      data = { id,
+        type: 'drink',
+        category,
+        name,
+        alcoholicOrNot,
+        image,
+        strTags,
+        nationality: '' };
     } else {
-      const { strMeal: title } = recipe;
-      data = { title };
+      const { idMeal: id, strCategory: category, strMeal: name,
+        strMealThumb: image, strTags, strArea } = recipe;
+      data = { id,
+        type: 'meal',
+        category,
+        name,
+        alcoholicOrNot: '',
+        image,
+        strTags,
+        nationality: strArea };
     }
     return data;
   };
@@ -58,7 +74,7 @@ class RecipeDetails extends React.Component {
     return (
       <div>
         <ShareButton />
-        <FavButton />
+        <FavButton dataRecipe={ dataRecipe } />
         <h1 data-testid="recipe-title">{dataRecipe.title}</h1>
         <img
           src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
