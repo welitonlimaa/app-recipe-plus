@@ -1,10 +1,11 @@
+import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import App from '../App';
 import renderWithRouterAndRedux from './helpers/renderWithRouter';
 
-describe('Testa a página Header', () => {
+describe('Testes para pagina Profile', () => {
   test('Testa se é redirencionado para a pagina do Profile corretamente', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
     act(() => {
