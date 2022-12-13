@@ -51,7 +51,7 @@ class RecipeSuggestion extends Component {
     // const { mealsSuggestionArray, drinksSuggestionArray } = this.state;
     const { route } = this.props;
     return (
-      <>
+      <div>
         <span>Sugestão de receitas</span>
         <div className="carrousel">
           {route.split('/')[1] === 'drinks' ? (
@@ -73,7 +73,7 @@ class RecipeSuggestion extends Component {
             ))
           )}
         </div>
-      </>
+      </div>
     );
   }
 }

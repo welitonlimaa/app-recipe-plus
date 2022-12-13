@@ -2,10 +2,10 @@
   width: 150px;
 }
 
-.startbtn {
+/* .startbtn {
   bottom: 0;
   position: fixed;
-}
+} */
 
 .ingred-checkded {
   text-decoration: line-through solid black;

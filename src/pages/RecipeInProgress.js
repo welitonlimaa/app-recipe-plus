@@ -116,28 +116,42 @@ class RecipeInProgress extends React.Component {
     const dataRecipe = this.variablePattern();
 
     return (
-      <div>
-        <ShareButton />
-        <FavButton />
-        <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
-        <img
-          src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
-          alt="Foto da receita"
-          width="300px"
-          height="300px"
-          data-testid="recipe-photo"
-        />
-        { route.includes('drinks')
-          ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
-          : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
-        <IngredientsCheckbox history={ history } handleDisabled={ this.handleDisabled } />
-        <section>
-          <h3>Instruções</h3>
-          <p data-testid="instructions">{recipe.strInstructions}</p>
-        </section>
-        <Link to="/done-recipes">
+      <div className="container-fluid">
+        <div className="fixed-top details-header">
+          <div className="details-subheader">
+            <ShareButton />
+            <FavButton />
+            <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
+          </div>
+          <img
+            src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
+            alt="Foto da receita"
+            width="300px"
+            height="300px"
+            data-testid="recipe-photo"
+          />
+        </div>
+        <div className="container details-content text-center">
+          { route.includes('drinks')
+            ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
+            : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
+          <IngredientsCheckbox
+            history={ history }
+            handleDisabled={ this.handleDisabled }
+          />
+          <section>
+            <h3>Instruções</h3>
+            <p data-testid="instructions">{recipe.strInstructions}</p>
+          </section>
+        </div>
+        <Link
+          to="/done-recipes"
+          className="footer text-center fixed-bottom
+        container-button p-4"
+        >
           <button
             type="button"
+            className="btn btn-primary btn-lg"
             data-testid="finish-recipe-btn"
             disabled={ isDisabled }
             onClick={ () => this.doneRecipe(dataRecipe) }
