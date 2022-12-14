@@ -81,7 +81,7 @@ class RecipeDetails extends React.Component {
               <ShareButton />
               <FavButton />
             </div>
-            <h1 data-testid="recipe-title">{dataRecipe.title}</h1>
+            <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
           </div>
           <img
             src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
@@ -95,9 +95,9 @@ class RecipeDetails extends React.Component {
           { route.includes('drinks')
             ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
             : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
-          <h2>Ingredients</h2>
+          <h2 className="fw-bold">Ingredients</h2>
           <IngredientsList history={ history } />
-          <h2>Instructions</h2>
+          <h2 className="fw-bold">Instructions</h2>
           <div className="infos">
             <p data-testid="instructions">{recipe.strInstructions}</p>
           </div>

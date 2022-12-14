@@ -9,6 +9,8 @@ import drinkimg from '../style/images/drinkimg.png';
 import mealimg from '../style/images/mealimg.png';
 import lupa from '../style/images/lupaicon.png';
 import perfilicon from '../style/images/perfilicon.png';
+import doneimg from '../style/images/doneimg.png';
+import perfil from '../style/images/Perfil.png';
 
 class Header extends React.Component {
   state = {
@@ -44,12 +46,14 @@ class Header extends React.Component {
       this.setState({
         searchBtn: false,
         title: 'Profile',
+        imgtitle: perfil,
       });
       break;
     case '/done-recipes':
       this.setState({
         searchBtn: false,
         title: 'Done Recipes',
+        imgtitle: doneimg,
       });
       break;
     case '/favorite-recipes':

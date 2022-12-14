@@ -52,7 +52,7 @@ class RecipeSuggestion extends Component {
     const { route } = this.props;
     return (
       <div>
-        <h2>Recommended</h2>
+        <h2 className="fw-bold">Recommended</h2>
         <div className="carrousel">
           {route.split('/')[1] === 'drinks' ? (
             this.saveMealsSuggestionArray().map((recipe, index) => (

@@ -137,12 +137,12 @@ class RecipeInProgress extends React.Component {
           { route.includes('drinks')
             ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
             : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
-          <h2>Ingredients</h2>
+          <h2 className="fw-bold">Ingredients</h2>
           <IngredientsCheckbox
             history={ history }
             handleDisabled={ this.handleDisabled }
           />
-          <h2>Instruções</h2>
+          <h2 className="fw-bold">Instructions</h2>
           <div className="infos">
             <p data-testid="instructions">{recipe.strInstructions}</p>
           </div>

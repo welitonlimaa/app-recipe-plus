@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 // import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import whiteHeartIcon from '../style/images/like.png';
 

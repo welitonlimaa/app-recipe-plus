@@ -3,7 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import { updateRoute } from '../redux/actions/actions';
-import shareIcon from '../images/shareIcon.svg';
+import shareIcon from '../style/images/Share.png';
+import allmeals from '../style/images/foods.png';
+import alldrinks from '../style/images/bebidas.png';
+import alltypes from '../style/images/alltypes.png';
 
 class DoneRecipes extends React.Component {
   state = {
@@ -22,56 +25,96 @@ class DoneRecipes extends React.Component {
     const { isEmpty } = this.state;
     const doneRecipe = JSON.parse(localStorage.getItem('doneRecipes')) || [];
     return (
-      <div>
+      <div className="text-center">
         {!isEmpty ? (
-          <div>
+          <div className="pb-5">
             <Header history={ history } />
-
-            <button data-testid="filter-by-all-btn" type="button">
-              All
-            </button>
-
-            <button data-testid="filter-by-meal-btn" type="button">
-              Meals
-            </button>
-
-            <button data-testid="filter-by-drink-btn" type="button">
-              Drinks
-            </button>
-            {doneRecipe.map((recipes, index) => (
-              <div key={ index }>
+            <div className="d-flex justify-content-center flex-wrap mt-4">
+              <button
+                data-testid="filter-by-all-btn"
+                type="button"
+                className="d-flex flex-column align-items-center btn-categorys"
+              >
                 <img
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ recipes.image }
-                  alt={ recipes.name }
+                  src={ alltypes }
+                  alt="all types"
                 />
+                All
+              </button>
 
-                <h4 data-testid={ `${index}-horizontal-name` }>{recipes.name}</h4>
+              <button
+                data-testid="filter-by-meal-btn"
+                type="button"
+                className="d-flex flex-column align-items-center btn-categorys"
+              >
+                <img
+                  src={ allmeals }
+                  alt="meals"
+                />
+                Meals
+              </button>
 
-                <p data-testid={ `${index}-horizontal-top-text` }>
-                  {`categoria: ${recipes.category}`}
-                </p>
-
-                <p data-testid={ `${index}-horizontal-done-date` }>
-                  {`Feito em: ${recipes.doneDate}`}
-                </p>
-
-                {recipes.tags.length > 0 ? (
-                  recipes.tags.map((tag) => (
-                    <p key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>
-                      {`Tipo: ${tag}`}
-                    </p>
-                  ))
-                ) : ''}
-                <button type="button">
+              <button
+                data-testid="filter-by-drink-btn"
+                type="button"
+                className="d-flex flex-column align-items-center btn-categorys"
+              >
+                <img
+                  src={ alldrinks }
+                  alt="drinks"
+                />
+                Drinks
+              </button>
+            </div>
+            <div className="d-flex justify-content-around flex-wrap mt-4">
+              {doneRecipe.map((recipes, index) => (
+                <div key={ index } className="done-card">
                   <img
-                    data-testid={ `${index}-horizontal-share-btn` }
-                    src={ shareIcon }
-                    alt="compartilhar"
+                    className="img-done"
+                    data-testid={ `${index}-horizontal-image` }
+                    src={ recipes.image }
+                    alt={ recipes.name }
                   />
-                </button>
-              </div>
-            ))}
+                  <div className="infos-donerecipes">
+                    <p
+                      data-testid={ `${index}-horizontal-name` }
+                      className="fw-bold"
+                    >
+                      {recipes.name}
+
+                    </p>
+
+                    <p data-testid={ `${index}-horizontal-top-text` }>
+                      {`categoria: ${recipes.category}`}
+                    </p>
+
+                    <p data-testid={ `${index}-horizontal-done-date` }>
+                      {`Feito em: ${recipes.doneDate}`}
+                    </p>
+                    <p>
+                      {recipes.tags.length > 0 ? (
+                        recipes.tags.map((tag) => (
+                          <span
+                            key={ tag }
+                            data-testid={ `${index}-${tag}-horizontal-tag` }
+
+                          >
+                            {`Tipo: ${tag}  `}
+                          </span>
+                        ))
+                      ) : ''}
+                    </p>
+                    <button type="button">
+                      <img
+                        data-testid={ `${index}-horizontal-share-btn` }
+                        src={ shareIcon }
+                        alt="compartilhar"
+                      />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <Header history={ history } />

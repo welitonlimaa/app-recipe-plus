@@ -1,5 +1,13 @@
+import loadingimg from '../style/images/loadingimg.png';
+
 function Loading() {
-  return <h1>loading...</h1>;
+  return (
+    <img
+      className="position-absolute top-50 start-50 translate-middle"
+      src={ loadingimg }
+      alt="loading..."
+    />
+  );
 }
 
 export default Loading;
