@@ -23,11 +23,9 @@
 
 .navbar {
   width: 100%;
-  background-color: red;
 }
 
 .content {
-  margin-top: 80px;
   padding-bottom: 80px;
 }
 
@@ -52,6 +50,36 @@
   background-color: blue;
 }
 
+.sub-header {
+  min-width: 100%;
+  background-color: rgba(252, 220, 54, 1);
+}
+
+.header-title {
+  width: 100%;
+  background-color: white;
+}
+
+.search-container {
+  padding-bottom: 10px;
+  border-radius: 10px;
+  color: white;
+  background-color: rgba(65, 25, 127, 1);
+}
+
+.search-container input {
+  margin-bottom: 25px;
+}
+
+button {
+  background-color: transparent;
+}
+
+.btn-secondary {
+  width: 200px;
+  height: 35px;
+}
+
 /* footer {
   bottom: 0;
   padding: 0;
@@ -72,7 +100,7 @@
 }
 */
 
-.meals>.logo {
+/* .meals>.logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
   font-family: Montserrat, sans-serif;
@@ -108,4 +136,4 @@
   100% {
     transform: rotate(-10deg);
   }
-}
+} */
