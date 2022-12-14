@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+// import profileIcon from '../images/profileIcon.svg';
+// import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 import logo from '../style/images/logo.png';
 import drinkimg from '../style/images/drinkimg.png';
 import mealimg from '../style/images/mealimg.png';
+import lupa from '../style/images/lupaicon.png';
+import perfilicon from '../style/images/perfilicon.png';
 
 class Header extends React.Component {
   state = {
@@ -87,7 +89,7 @@ class Header extends React.Component {
             onClick={ this.redirectProfile }
           >
             <img
-              src={ profileIcon }
+              src={ perfilicon }
               alt="Imagem do perfil"
               data-testid="profile-top-btn"
             />
@@ -96,7 +98,7 @@ class Header extends React.Component {
             searchBtn && (
               <button type="button" onClick={ this.handleClick } className="p-2">
                 <img
-                  src={ searchIcon }
+                  src={ lupa }
                   alt="Imagem do perfil"
                   data-testid="search-top-btn"
                 />

@@ -1,5 +1,10 @@
+.recipe-card {
+  width: 180px;
+  margin: 10px;
+}
+
 .recipe-card img {
-  width: 150px;
+  width: 100%;
 }
 
 /* .startbtn {

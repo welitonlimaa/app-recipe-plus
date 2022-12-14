@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import { fetchMealCategory, fetchResetDB } from '../redux/actions/actions';
 import RecipeMealCard from './RecipeMealCard';
 import RecipeNotFound from './RecipeNotFound';
+import allmeals from '../style/images/allmeals.png';
+import beef from '../style/images/beef.png';
+import breakFast from '../style/images/breakfast.png';
+import chicken from '../style/images/chicken.png';
+import dessert from '../style/images/dessert.png';
+import goat from '../style/images/goat.png';
 
 class Meals extends React.Component {
   state = {
@@ -46,24 +52,36 @@ class Meals extends React.Component {
       redirectForRecipe(route);
     }
 
+    const imgCategorys = [beef, breakFast, chicken, dessert, goat];
+
     return (
       <div className="text-center">
         <div className="d-flex justify-content-center flex-wrap mt-4">
           <button
             type="button"
+            className="d-flex flex-column align-items-center btn-categorys"
             data-testid="All-category-filter"
             onClick={ () => this.getAllMeals('All') }
           >
+            <img
+              src={ allmeals }
+              alt="all"
+            />
             All
           </button>
           {
             categorys.map((category, index) => (
               <button
                 type="button"
+                className="d-flex flex-column align-items-center btn-categorys"
                 key={ index }
                 data-testid={ `${category}-category-filter` }
                 onClick={ () => this.getByCategory(category) }
               >
+                <img
+                  src={ imgCategorys[index] }
+                  alt={ category }
+                />
                 {category}
                 {' '}
               </button>

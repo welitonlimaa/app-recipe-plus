@@ -10,7 +10,13 @@ class RecipeMealCard extends React.Component {
       <div className="recipe-card" data-testid={ `${id}-recipe-card` }>
         <Link to={ `/meals/${idMeal}` }>
           <img src={ strMealThumb } alt={ strMeal } data-testid={ `${id}-card-img` } />
-          <p data-testid={ `${id}-card-name` }>{strMeal}</p>
+          <p
+            className="h5"
+            data-testid={ `${id}-card-name` }
+          >
+            {strMeal}
+
+          </p>
         </Link>
       </div>
     );

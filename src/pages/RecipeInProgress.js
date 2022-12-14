@@ -152,6 +152,7 @@ class RecipeInProgress extends React.Component {
           <button
             type="button"
             className="btn btn-primary btn-lg"
+            id="finish-button"
             data-testid="finish-recipe-btn"
             disabled={ isDisabled }
             onClick={ () => this.doneRecipe(dataRecipe) }

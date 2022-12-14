@@ -30,7 +30,7 @@
 }
 
 .footer {
-  background-color: blue;
+  background-color: rgba(65, 25, 127, 1);
 }
 
 .details-header img {
@@ -47,11 +47,16 @@
 }
 
 .container-button {
-  background-color: blue;
+  background-color: white;
+}
+
+.container-button button {
+  border: none;
+  background-color: rgba(252, 196, 54, 1);
 }
 
 .sub-header {
-  min-width: 100%;
+  width: 100%;
   background-color: rgba(252, 220, 54, 1);
 }
 
@@ -62,7 +67,7 @@
 
 .search-container {
   padding-bottom: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   color: white;
   background-color: rgba(65, 25, 127, 1);
 }
@@ -78,6 +83,24 @@ button {
 .btn-secondary {
   width: 200px;
   height: 35px;
+}
+
+.btn-primary {
+  width: 340px;
+  height: 45px;
+}
+
+.svg-colorone {
+  filter: invert(93%) sepia(15%) saturate(5934%) hue-rotate(331deg) brightness(107%) contrast(98%);
+}
+
+#finish-button {
+  background-color: rgba(252, 196, 54, 1);
+}
+
+.btn-categorys {
+  width: 70px;
+  margin: 5px;
 }
 
 /* footer {

@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+// import drinkIcon from '../images/drinkIcon.svg';
+// import mealIcon from '../images/mealIcon.svg';
+import drinkimg from '../style/images/drinkimg.png';
+import mealimg from '../style/images/mealimg.png';
 
 class Footer extends React.Component {
   render() {
     const { changeRoute } = this.props;
     return (
       <footer
-        className="footer fixed-bottom p-2"
+        className="footer fixed-bottom p-3"
         data-testid="footer"
       >
         <div className="d-flex justify-content-between flex-wrap">
@@ -19,7 +21,8 @@ class Footer extends React.Component {
           >
             <img
               data-testid="meals-bottom-btn"
-              src={ mealIcon }
+              // className="svg-colorone"
+              src={ mealimg }
               alt="Comidas"
             />
           </button>
@@ -29,7 +32,8 @@ class Footer extends React.Component {
           >
             <img
               data-testid="drinks-bottom-btn"
-              src={ drinkIcon }
+              // className="svg-colorone"
+              src={ drinkimg }
               alt="Bebidas"
             />
           </button>
