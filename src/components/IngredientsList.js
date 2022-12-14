@@ -11,16 +11,18 @@ class IngredientsList extends React.Component {
         `${recipe[ingredient]} ${recipe[`strMeasure${index + 1}`]}`));
 
     return (
-      <ul>
-        {ingredients.map((ingred, index) => (
-          <li
-            key={ index }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            {ingred}
-          </li>
-        ))}
-      </ul>
+      <div className="text-sm-left infos">
+        <ul>
+          {ingredients.map((ingred, index) => (
+            <li
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {ingred}
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   };
 

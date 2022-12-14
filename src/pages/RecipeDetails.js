@@ -53,14 +53,18 @@ class RecipeDetails extends React.Component {
       return <Loading />;
     }
 
+    const url = recipe.strYoutube !== undefined
+      ? recipe.strYoutube.split('watch?v=') : '';
     const dataRecipe = this.variablePattern();
 
     return (
       <div className="container-fluid">
         <div className="fixed-top details-header">
           <div className="details-subheader">
-            <ShareButton />
-            <FavButton />
+            <div>
+              <ShareButton />
+              <FavButton />
+            </div>
             <h1 data-testid="recipe-title">{dataRecipe.title}</h1>
           </div>
           <img
@@ -71,20 +75,22 @@ class RecipeDetails extends React.Component {
             data-testid="recipe-photo"
           />
         </div>
-        <div className="container details-content text-center">
+        <div className="container details-content">
           { route.includes('drinks')
             ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
             : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
+          <h2>Ingredients</h2>
           <IngredientsList history={ history } />
-          <section>
-            <h3>Instruções</h3>
+          <h2>Instructions</h2>
+          <div className="infos">
             <p data-testid="instructions">{recipe.strInstructions}</p>
-          </section>
-          <div>
+          </div>
+          <div className="text-center video-container">
             {
-              history.location.pathname.includes('meals') && <iframe
+              history.location.pathname.includes('meals')
+              && <iframe
                 data-testid="video"
-                src={ recipe.strYoutube }
+                src={ `https://www.youtube.com/embed/${url[1]}` }
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay;

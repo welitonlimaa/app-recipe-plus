@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import artlogin from '../style/images/artlogin.png';
 
 class Login extends React.Component {
   state = {
@@ -33,8 +34,13 @@ class Login extends React.Component {
     const { email, password } = this.state;
     return (
       <div className="container-fluid">
-        <main className="position-absolute top-50 start-50 translate-middle">
-          <form className="d-grid gap-2">
+        <img
+          className="navbar"
+          src={ artlogin }
+          alt="art"
+        />
+        <main className="text-center w-100">
+          <form className="d-grid gap-2 login-container">
             <h1 className="display-6">Login</h1>
             <label htmlFor="email" className="form-label d-block">
               <input

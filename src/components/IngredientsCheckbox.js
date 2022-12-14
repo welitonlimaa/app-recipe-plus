@@ -71,29 +71,31 @@ class IngredientsCheckbox extends React.Component {
         `${recipe[ingredient]} ${recipe[`strMeasure${index + 1}`]}`));
 
     return (
-      <ul>
-        {ingredients.map((ingred, index) => {
-          const status = this.isChecked(ingred);
+      <div className="text-sm-left infos">
+        <ul>
+          {ingredients.map((ingred, index) => {
+            const status = this.isChecked(ingred);
 
-          return (
-            <li key={ index }>
-              <label
-                htmlFor={ `ingrediente-${index}` }
-                data-testid={ `${index}-ingredient-step` }
-                className={ status ? 'ingred-checkded' : '' }
-              >
-                <input
-                  type="checkbox"
-                  id={ `ingrediente-${index}` }
-                  onChange={ () => this.checkIngredient(ingred) }
-                  checked={ status }
-                />
-                {ingred}
-              </label>
-            </li>
-          );
-        })}
-      </ul>
+            return (
+              <li key={ index }>
+                <label
+                  htmlFor={ `ingrediente-${index}` }
+                  data-testid={ `${index}-ingredient-step` }
+                  className={ status ? 'ingred-checkded' : '' }
+                >
+                  <input
+                    type="checkbox"
+                    id={ `ingrediente-${index}` }
+                    onChange={ () => this.checkIngredient(ingred) }
+                    checked={ status }
+                  />
+                  {ingred}
+                </label>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     );
   };
 

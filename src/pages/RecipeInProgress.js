@@ -119,8 +119,10 @@ class RecipeInProgress extends React.Component {
       <div className="container-fluid">
         <div className="fixed-top details-header">
           <div className="details-subheader">
-            <ShareButton />
-            <FavButton />
+            <div>
+              <ShareButton />
+              <FavButton />
+            </div>
             <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
           </div>
           <img
@@ -131,18 +133,19 @@ class RecipeInProgress extends React.Component {
             data-testid="recipe-photo"
           />
         </div>
-        <div className="container details-content text-center">
+        <div className="container details-content">
           { route.includes('drinks')
             ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
             : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
+          <h2>Ingredients</h2>
           <IngredientsCheckbox
             history={ history }
             handleDisabled={ this.handleDisabled }
           />
-          <section>
-            <h3>Instruções</h3>
+          <h2>Instruções</h2>
+          <div className="infos">
             <p data-testid="instructions">{recipe.strInstructions}</p>
-          </section>
+          </div>
         </div>
         <Link
           to="/done-recipes"
