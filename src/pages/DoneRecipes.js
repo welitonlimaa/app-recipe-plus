@@ -85,7 +85,7 @@ class DoneRecipes extends React.Component {
                     </p>
 
                     <p data-testid={ `${index}-horizontal-top-text` }>
-                      {`categoria: ${recipes.category}`}
+                      {`Categoria: ${recipes.category}`}
                     </p>
 
                     <p data-testid={ `${index}-horizontal-done-date` }>
