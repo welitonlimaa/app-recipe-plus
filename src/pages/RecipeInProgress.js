@@ -52,7 +52,13 @@ class RecipeInProgress extends React.Component {
   };
 
   doneRecipe = (data) => {
-    const date = new Date();
+    const options = {
+      year: '2-digit',
+      month: 'numeric',
+      day: 'numeric',
+    };
+    const newDate = new Date();
+    const date = newDate.toLocaleDateString('pt-br', options);
     const { id,
       type,
       category,
@@ -73,7 +79,7 @@ class RecipeInProgress extends React.Component {
       image,
       tags,
       alcoholicOrNot,
-      doneDate: date.toISOString(),
+      doneDate: date,
     };
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes, obj]));
