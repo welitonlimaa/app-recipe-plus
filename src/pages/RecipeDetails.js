@@ -64,6 +64,7 @@ class RecipeDetails extends React.Component {
 
   render() {
     const { loading, recipe, history } = this.props;
+    console.log(history);
     const { route } = this.state;
     if (loading) {
       return <Loading />;
@@ -75,7 +76,7 @@ class RecipeDetails extends React.Component {
       <div>
         <ShareButton />
         <FavButton dataRecipe={ dataRecipe } />
-        <h1 data-testid="recipe-title">{dataRecipe.title}</h1>
+        <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
         <img
           src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
           alt="Foto da receita"
