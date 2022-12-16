@@ -15,6 +15,7 @@ class RecipeDetails extends React.Component {
     recipeStatus: false,
     isFav: false,
     isDone: false,
+    idRecipe: '',
   };
 
   componentDidMount() {
@@ -23,7 +24,7 @@ class RecipeDetails extends React.Component {
     const id = pathname.split('/');
     dispatch(fetchRecipeById(id[2], id[1]));
     dispatch(fetchSuggest());
-    this.setState({ type: id[1], route: pathname });
+    this.setState({ type: id[1], route: pathname, idRecipe: id[2] });
     dispatch(updateRoute(pathname));
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
     if (inProgress[id[1]] !== undefined) {
@@ -54,7 +55,8 @@ class RecipeDetails extends React.Component {
     if (type.includes('drinks')) {
       const { idDrink: id, strCategory: category, strDrink: name,
         strAlcoholic: alcoholicOrNot, strDrinkThumb: image, strTags } = recipe;
-      data = { id,
+      data = {
+        id,
         type: 'drink',
         category,
         name,
@@ -65,7 +67,8 @@ class RecipeDetails extends React.Component {
     } else {
       const { idMeal: id, strCategory: category, strMeal: name,
         strMealThumb: image, strTags, strArea } = recipe;
-      data = { id,
+      data = {
+        id,
         type: 'meal',
         category,
         name,
@@ -91,7 +94,7 @@ class RecipeDetails extends React.Component {
 
   render() {
     const { loading, recipe, history } = this.props;
-    const { route, recipeStatus, isFav, isDone } = this.state;
+    const { route, recipeStatus, isFav, isDone, type, idRecipe } = this.state;
     if (loading) {
       return <Loading />;
     }
@@ -100,7 +103,7 @@ class RecipeDetails extends React.Component {
 
     return (
       <div>
-        <ShareButton />
+        <ShareButton type={ type } idRecipe={ idRecipe } />
         <FavButton
           dataRecipe={ dataRecipe }
           isFav={ isFav }
