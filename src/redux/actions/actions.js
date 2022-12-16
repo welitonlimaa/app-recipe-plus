@@ -108,7 +108,7 @@ export const fetchResetDB = () => async (dispatch) => {
 
 export const fetchRecipeById = (id, category) => async (dispatch) => {
   dispatch(requestAPI());
-  if (category.includes('drink')) {
+  if (category.includes('drinks')) {
     const dataRecipe = await fetchDrinkRecipe(id);
 
     dispatch(insertDataRecipe(dataRecipe));

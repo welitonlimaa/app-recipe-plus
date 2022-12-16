@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 class FavButton extends React.Component {
   addToFavorite = () => {
-    const { dataRecipe } = this.props;
+    const { dataRecipe, favRecipe } = this.props;
     const { id,
       type,
       category,
@@ -25,9 +26,11 @@ class FavButton extends React.Component {
     };
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes, obj]));
+    favRecipe();
   };
 
   render() {
+    const { isFav } = this.props;
     return (
       <button
         type="button"
@@ -35,7 +38,7 @@ class FavButton extends React.Component {
       >
         <img
           data-testid="favorite-btn"
-          src={ whiteHeartIcon }
+          src={ isFav ? blackHeartIcon : whiteHeartIcon }
           alt="favortitar"
         />
       </button>
@@ -53,6 +56,8 @@ FavButton.propTypes = {
     nationality: PropTypes.string,
     type: PropTypes.string,
   }).isRequired,
+  isFav: PropTypes.bool.isRequired,
+  favRecipe: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

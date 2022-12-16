@@ -12,16 +12,31 @@ class RecipeDetails extends React.Component {
   state = {
     type: '',
     route: '',
+    recipeStatus: false,
+    isFav: false,
   };
 
   componentDidMount() {
     const { dispatch, history } = this.props;
     const { pathname } = history.location;
-    const id = pathname.split('s/');
-    dispatch(fetchRecipeById(id[1], id[0]));
+    const id = pathname.split('/');
+    dispatch(fetchRecipeById(id[2], id[1]));
     dispatch(fetchSuggest());
-    this.setState({ type: id[0], route: pathname });
+    this.setState({ type: id[1], route: pathname });
     dispatch(updateRoute(pathname));
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
+    if (inProgress[id[1]] !== undefined) {
+      const recipeStatus = inProgress[id[1]][id[2]];
+      const status = recipeStatus !== undefined;
+      this.setState({ recipeStatus: status });
+    }
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (favoriteRecipes.length !== 0) {
+      const status = favoriteRecipes.some((recipe) => recipe.id === id[2]);
+
+      this.setState({ isFav: status });
+      console.log(status);
+    }
   }
 
   // parametriza os nomes das variáveis de acordo o tipo se drink ou meal
@@ -29,7 +44,7 @@ class RecipeDetails extends React.Component {
     const { type } = this.state;
     const { recipe } = this.props;
     let data = {};
-    if (type.includes('drink')) {
+    if (type.includes('drinks')) {
       const { idDrink: id, strCategory: category, strDrink: name,
         strAlcoholic: alcoholicOrNot, strDrinkThumb: image, strTags } = recipe;
       data = { id,
@@ -62,9 +77,14 @@ class RecipeDetails extends React.Component {
     history.push(url);
   };
 
+  favRecipe = () => {
+    const { isFav } = this.state;
+    this.setState({ isFav: !isFav });
+  };
+
   render() {
     const { loading, recipe, history } = this.props;
-    const { route } = this.state;
+    const { route, recipeStatus, isFav } = this.state;
     if (loading) {
       return <Loading />;
     }
@@ -74,8 +94,12 @@ class RecipeDetails extends React.Component {
     return (
       <div>
         <ShareButton />
-        <FavButton dataRecipe={ dataRecipe } />
-        <h1 data-testid="recipe-title">{dataRecipe.title}</h1>
+        <FavButton
+          dataRecipe={ dataRecipe }
+          isFav={ isFav }
+          favRecipe={ this.favRecipe }
+        />
+        <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
         <img
           src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
           alt="Foto da receita"
@@ -112,7 +136,7 @@ class RecipeDetails extends React.Component {
           data-testid="start-recipe-btn"
           onClick={ this.changeRoute }
         >
-          Start Recipe
+          { recipeStatus ? 'Continue Recipe' : 'Start Recipe'}
         </button>
 
       </div>
