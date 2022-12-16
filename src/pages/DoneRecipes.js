@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import ShareButton from '../components/ShareButton';
 import { updateRoute } from '../redux/actions/actions';
-import shareIcon from '../images/shareIcon.svg';
 
 class DoneRecipes extends React.Component {
   state = {
@@ -40,13 +41,17 @@ class DoneRecipes extends React.Component {
             </button>
             {doneRecipe.map((recipes, index) => (
               <div key={ index }>
-                <img
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ recipes.image }
-                  alt={ recipes.name }
-                />
-
-                <h4 data-testid={ `${index}-horizontal-name` }>{recipes.name}</h4>
+                <Link to={ `/${recipes.type}s/${recipes.id}` }>
+                  <img
+                    width="100px"
+                    data-testid={ `${index}-horizontal-image` }
+                    src={ recipes.image }
+                    alt={ recipes.name }
+                  />
+                </Link>
+                <Link to={ `/${recipes.type}s/${recipes.id}` }>
+                  <h4 data-testid={ `${index}-horizontal-name` }>{recipes.name}</h4>
+                </Link>
 
                 <p data-testid={ `${index}-horizontal-top-text` }>
                   {`categoria: ${recipes.category}`}
@@ -63,13 +68,11 @@ class DoneRecipes extends React.Component {
                     </p>
                   ))
                 ) : ''}
-                <button type="button">
-                  <img
-                    data-testid={ `${index}-horizontal-share-btn` }
-                    src={ shareIcon }
-                    alt="compartilhar"
-                  />
-                </button>
+                <ShareButton
+                  datatestid={ `${index}-horizontal-share-btn` }
+                  type={ `${recipes.type}s` }
+                  idRecipe={ recipes.id }
+                />
               </div>
             ))}
           </div>

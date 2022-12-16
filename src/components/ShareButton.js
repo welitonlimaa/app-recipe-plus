@@ -18,6 +18,7 @@ class ShareButton extends React.Component {
   };
 
   render() {
+    const { datatestid } = this.props;
     const { copy } = this.state;
     return (
       <div>
@@ -27,7 +28,7 @@ class ShareButton extends React.Component {
           onClick={ this.copylink }
         >
           <img
-            data-testid="share-btn"
+            data-testid={ datatestid }
             src={ shareIcon }
             alt="compartilhar"
           />
@@ -38,6 +39,7 @@ class ShareButton extends React.Component {
 }
 
 ShareButton.propTypes = {
+  datatestid: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   idRecipe: PropTypes.string.isRequired,
 };

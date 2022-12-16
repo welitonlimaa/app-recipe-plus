@@ -131,7 +131,7 @@ class RecipeInProgress extends React.Component {
 
     return (
       <div>
-        <ShareButton type={ type } idRecipe={ idRecipe } />
+        <ShareButton datatestid="share-btn" type={ type } idRecipe={ idRecipe } />
         <FavButton
           dataRecipe={ dataRecipe }
           isFav={ isFav }
