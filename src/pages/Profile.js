@@ -8,13 +8,19 @@ import { updateRoute } from '../redux/actions/actions';
 class Profile extends React.Component {
   state = {
     pathname: '/profile',
-    user: (JSON.parse(localStorage.getItem('user'))).email,
+    user: 'email@email.com',
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     const { pathname } = this.state;
     dispatch(updateRoute(pathname));
+    if ((JSON.parse(localStorage.getItem('user'))) !== null) {
+      const user = (JSON.parse(localStorage.getItem('user'))).email;
+      this.setState({
+        user,
+      });
+    }
   }
 
   changeRoute = (route) => {
@@ -30,7 +36,6 @@ class Profile extends React.Component {
         <Header
           history={ history }
         />
-        <h1>Profile</h1>
         <h3 data-testid="profile-email">{user}</h3>
         <button
           type="button"
@@ -52,7 +57,7 @@ class Profile extends React.Component {
           type="button"
           data-testid="profile-logout-btn"
           onClick={ () => {
-            localStorage.clear();
+            // localStorage.clear();
             history.push('/');
           } }
         >
