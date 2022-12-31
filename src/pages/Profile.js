@@ -8,6 +8,7 @@ import { updateRoute } from '../redux/actions/actions';
 class Profile extends React.Component {
   state = {
     pathname: '/profile',
+    user: (JSON.parse(localStorage.getItem('user'))).email,
   };
 
   componentDidMount() {
@@ -23,11 +24,17 @@ class Profile extends React.Component {
 
   render() {
     const { history } = this.props;
+    const { user } = this.state;
     return (
       <>
         <Header
           history={ history }
         />
+        <h1>Profile</h1>
+        <h3 data-testid="profile-email">{user}</h3>
+        <button type="button" data-testid="profile-done-btn">Done Recipes</button>
+        <button type="button" data-testid="profile-favorite-btn">Favorite Recipes</button>
+        <button type="button" data-testid="profile-logout-btn">Logout</button>
         <Footer changeRoute={ this.changeRoute } />
       </>
     );
