@@ -54,7 +54,7 @@ class DoneRecipes extends React.Component {
                 </Link>
 
                 <p data-testid={ `${index}-horizontal-top-text` }>
-                  {`categoria: ${recipes.category}`}
+                  { `${recipes.nationality} - ${recipes.category}` }
                 </p>
 
                 <p data-testid={ `${index}-horizontal-done-date` }>
