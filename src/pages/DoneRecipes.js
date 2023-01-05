@@ -8,6 +8,7 @@ import { updateRoute } from '../redux/actions/actions';
 
 class DoneRecipes extends React.Component {
   state = {
+    doneRecipes: JSON.parse(localStorage.getItem('doneRecipes')) || [],
     pathname: '/done-recipes',
     isEmpty: false,
   };
@@ -18,28 +19,52 @@ class DoneRecipes extends React.Component {
     dispatch(updateRoute(pathname));
   }
 
+  filterBy = (type) => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    if (doneRecipes.length !== 0) {
+      if (type !== 'all') {
+        const newData = doneRecipes.filter((data) => data.type === type);
+        this.setState({ doneRecipes: newData });
+      } else {
+        this.setState({ doneRecipes });
+      }
+    }
+  };
+
   render() {
     const { history } = this.props;
-    const { isEmpty } = this.state;
-    const doneRecipe = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    const { isEmpty, doneRecipes } = this.state;
+    // const doneRecipe = JSON.parse(localStorage.getItem('doneRecipes')) || [];
     return (
       <div>
         {!isEmpty ? (
           <div>
             <Header history={ history } />
 
-            <button data-testid="filter-by-all-btn" type="button">
+            <button
+              data-testid="filter-by-all-btn"
+              type="button"
+              onClick={ () => this.filterBy('all') }
+            >
               All
             </button>
 
-            <button data-testid="filter-by-meal-btn" type="button">
+            <button
+              data-testid="filter-by-meal-btn"
+              type="button"
+              onClick={ () => this.filterBy('meal') }
+            >
               Meals
             </button>
 
-            <button data-testid="filter-by-drink-btn" type="button">
+            <button
+              data-testid="filter-by-drink-btn"
+              type="button"
+              onClick={ () => this.filterBy('drink') }
+            >
               Drinks
             </button>
-            {doneRecipe.map((recipes, index) => (
+            {doneRecipes.map((recipes, index) => (
               <div key={ index }>
                 <Link to={ `/${recipes.type}s/${recipes.id}` }>
                   <img
