@@ -34,7 +34,7 @@ class DoneRecipes extends React.Component {
   render() {
     const { history } = this.props;
     const { isEmpty, doneRecipes } = this.state;
-    // const doneRecipe = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+
     return (
       <div>
         {!isEmpty ? (
