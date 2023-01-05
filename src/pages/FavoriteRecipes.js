@@ -32,6 +32,10 @@ class FavoriteRecipes extends React.Component {
     }
   };
 
+  updateFavs = (newFavs) => {
+    this.setState({ favoriteRecipes: newFavs });
+  };
+
   render() {
     const { history } = this.props;
     const { isEmpty, favoriteRecipes } = this.state;
@@ -93,7 +97,8 @@ class FavoriteRecipes extends React.Component {
                   datatestid={ `${index}-horizontal-favorite-btn` }
                   dataRecipe={ favoriteRecipes }
                   isFav={ isFav }
-                  // favRecipe={ this.favRecipe }
+                  idRecipe={ recipes.id }
+                  favRecipe={ this.updateFavs }
                 />
               </div>
             ))}

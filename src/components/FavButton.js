@@ -30,7 +30,12 @@ class FavButton extends React.Component {
   };
 
   removeFav = () => {
-    console.log('remove');
+    const { idRecipe, dataRecipe, datatestid, favRecipe } = this.props;
+    const id = datatestid === 'favorite-btn' ? dataRecipe.id : idRecipe;
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const newData = favoriteRecipes.filter((data) => data.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newData));
+    favRecipe(newData);
   };
 
   render() {
@@ -63,6 +68,7 @@ FavButton.propTypes = {
   isFav: PropTypes.bool.isRequired,
   favRecipe: PropTypes.func.isRequired,
   datatestid: PropTypes.string.isRequired,
+  idRecipe: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
