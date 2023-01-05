@@ -39,10 +39,9 @@ class FavButton extends React.Component {
       <button
         type="button"
         onClick={ isFav ? this.removeFav : this.addToFavorite }
-        data-testid={ datatestid }
       >
         <img
-          data-testid="favorite-btn"
+          data-testid={ datatestid }
           src={ isFav ? blackHeartIcon : whiteHeartIcon }
           alt="favortitar"
         />

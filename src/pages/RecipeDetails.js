@@ -105,6 +105,7 @@ class RecipeDetails extends React.Component {
       <div>
         <ShareButton datatestid="share-btn" type={ type } idRecipe={ idRecipe } />
         <FavButton
+          datatestid="favorite-btn"
           dataRecipe={ dataRecipe }
           isFav={ isFav }
           favRecipe={ this.favRecipe }
