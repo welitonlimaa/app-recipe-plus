@@ -29,15 +29,24 @@ class FavButton extends React.Component {
     favRecipe();
   };
 
+  removeFav = () => {
+    const { idRecipe, dataRecipe, datatestid, favRecipe } = this.props;
+    const id = datatestid === 'favorite-btn' ? dataRecipe.id : idRecipe;
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const newData = favoriteRecipes.filter((data) => data.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newData));
+    favRecipe(newData);
+  };
+
   render() {
-    const { isFav } = this.props;
+    const { isFav, datatestid } = this.props;
     return (
       <button
         type="button"
-        onClick={ this.addToFavorite }
+        onClick={ isFav ? this.removeFav : this.addToFavorite }
       >
         <img
-          data-testid="favorite-btn"
+          data-testid={ datatestid }
           src={ isFav ? blackHeartIcon : whiteHeartIcon }
           alt="favortitar"
         />
@@ -58,6 +67,8 @@ FavButton.propTypes = {
   }).isRequired,
   isFav: PropTypes.bool.isRequired,
   favRecipe: PropTypes.func.isRequired,
+  datatestid: PropTypes.string.isRequired,
+  idRecipe: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
