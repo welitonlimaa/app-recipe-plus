@@ -183,9 +183,18 @@ button {
   align-items: center;
   padding: 15px;
   font-size: larger;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .menu button img {
   width: 60px;
+}
+
+:link {
+  text-decoration: none;
+  color: black;
+}
+
+:visited {
+  color: black;
 }
