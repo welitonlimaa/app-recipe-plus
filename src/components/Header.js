@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-// import profileIcon from '../images/profileIcon.svg';
-// import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 import logo from '../style/images/logo.png';
 import drinkimg from '../style/images/drinkimg.png';
@@ -11,6 +9,7 @@ import lupa from '../style/images/lupaicon.png';
 import perfilicon from '../style/images/perfilicon.png';
 import doneimg from '../style/images/doneimg.png';
 import perfil from '../style/images/Perfil.png';
+import iconFavRecipes from '../style/images/favrecipes.png';
 
 class Header extends React.Component {
   state = {
@@ -60,6 +59,7 @@ class Header extends React.Component {
       this.setState({
         searchBtn: false,
         title: 'Favorite Recipes',
+        imgtitle: iconFavRecipes,
       });
       break;
     default:
