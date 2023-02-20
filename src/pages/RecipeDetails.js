@@ -12,16 +12,39 @@ class RecipeDetails extends React.Component {
   state = {
     type: '',
     route: '',
+    recipeStatus: false,
+    isFav: false,
+    isDone: false,
+    idRecipe: '',
   };
 
   componentDidMount() {
     const { dispatch, history } = this.props;
     const { pathname } = history.location;
-    const id = pathname.split('s/');
-    dispatch(fetchRecipeById(id[1], id[0]));
+    const id = pathname.split('/');
+    dispatch(fetchRecipeById(id[2], id[1]));
     dispatch(fetchSuggest());
-    this.setState({ type: id[0], route: pathname });
+    this.setState({ type: id[1], route: pathname, idRecipe: id[2] });
     dispatch(updateRoute(pathname));
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {};
+    if (inProgress[id[1]] !== undefined) {
+      const recipeStatus = inProgress[id[1]][id[2]];
+      const status = recipeStatus !== undefined;
+      this.setState({ recipeStatus: status });
+    }
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (favoriteRecipes.length !== 0) {
+      const status = favoriteRecipes.some((recipe) => recipe.id === id[2]);
+
+      this.setState({ isFav: status });
+    }
+    const doneRecipe = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    if (doneRecipe.length !== 0) {
+      const status = doneRecipe.some((recipe) => recipe.id === id[2]);
+
+      this.setState({ isDone: status });
+      console.log(status);
+    }
   }
 
   // parametriza os nomes das variáveis de acordo o tipo se drink ou meal
@@ -29,10 +52,11 @@ class RecipeDetails extends React.Component {
     const { type } = this.state;
     const { recipe } = this.props;
     let data = {};
-    if (type.includes('drink')) {
+    if (type.includes('drinks')) {
       const { idDrink: id, strCategory: category, strDrink: name,
         strAlcoholic: alcoholicOrNot, strDrinkThumb: image, strTags } = recipe;
-      data = { id,
+      data = {
+        id,
         type: 'drink',
         category,
         name,
@@ -43,7 +67,8 @@ class RecipeDetails extends React.Component {
     } else {
       const { idMeal: id, strCategory: category, strMeal: name,
         strMealThumb: image, strTags, strArea } = recipe;
-      data = { id,
+      data = {
+        id,
         type: 'meal',
         category,
         name,
@@ -62,9 +87,14 @@ class RecipeDetails extends React.Component {
     history.push(url);
   };
 
+  favRecipe = () => {
+    const { isFav } = this.state;
+    this.setState({ isFav: !isFav });
+  };
+
   render() {
     const { loading, recipe, history } = this.props;
-    const { route } = this.state;
+    const { route, recipeStatus, isFav, isDone, type, idRecipe } = this.state;
     if (loading) {
       return <Loading />;
     }
@@ -78,8 +108,13 @@ class RecipeDetails extends React.Component {
         <div className="fixed-top details-header">
           <div className="details-subheader">
             <div>
-              <ShareButton />
-              <FavButton />
+              <ShareButton datatestid="share-btn" type={ type } idRecipe={ idRecipe } />
+              <FavButton
+                datatestid="favorite-btn"
+                dataRecipe={ dataRecipe }
+                isFav={ isFav }
+                favRecipe={ this.favRecipe }
+              />
             </div>
             <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
           </div>
@@ -118,14 +153,19 @@ class RecipeDetails extends React.Component {
           <RecipeSuggestion />
         </div>
         <div className="footer text-center fixed-bottom container-button p-4">
-          <button
-            type="button"
-            className="startbtn btn btn-primary btn-lg"
-            data-testid="start-recipe-btn"
-            onClick={ this.changeRoute }
-          >
-            Start Recipe
-          </button>
+          {
+            isDone ? ''
+              : (
+                <button
+                  type="button"
+                  className="startbtn btn btn-primary btn-lg"
+                  data-testid="start-recipe-btn"
+                  onClick={ this.changeRoute }
+                >
+                  { recipeStatus ? 'Continue Recipe' : 'Start Recipe'}
+                </button>
+              )
+          }
         </div>
       </div>
     );

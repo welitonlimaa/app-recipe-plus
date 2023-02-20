@@ -12,6 +12,8 @@ class RecipeInProgress extends React.Component {
     type: '',
     route: '',
     isDisabled: true,
+    isFav: false,
+    idRecipe: '',
   };
 
   componentDidMount() {
@@ -19,7 +21,7 @@ class RecipeInProgress extends React.Component {
     const { pathname } = history.location;
     const id = pathname.split('/');
     dispatch(fetchRecipeById(id[2], id[1]));
-    this.setState({ type: id[1], route: pathname });
+    this.setState({ type: id[1], route: pathname, idRecipe: id[2] });
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
     if (inProgress === null || inProgress === undefined) {
@@ -34,6 +36,13 @@ class RecipeInProgress extends React.Component {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     if (doneRecipes === null || doneRecipes === undefined) {
       localStorage.setItem('doneRecipes', JSON.stringify([]));
+    }
+
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (favoriteRecipes.length !== 0) {
+      const status = favoriteRecipes.some((recipe) => recipe.id === id[2]);
+
+      this.setState({ isFav: status });
     }
   }
 
@@ -115,9 +124,14 @@ class RecipeInProgress extends React.Component {
     return data;
   };
 
+  favRecipe = () => {
+    const { isFav } = this.state;
+    this.setState({ isFav: !isFav });
+  };
+
   render() {
     const { recipe, history } = this.props;
-    const { route, isDisabled } = this.state;
+    const { route, isDisabled, isFav, type, idRecipe } = this.state;
 
     const dataRecipe = this.variablePattern();
 
@@ -126,8 +140,13 @@ class RecipeInProgress extends React.Component {
         <div className="fixed-top details-header">
           <div className="details-subheader">
             <div>
-              <ShareButton />
-              <FavButton />
+              <ShareButton datatestid="share-btn" type={ type } idRecipe={ idRecipe } />
+              <FavButton
+                datatestid="favorite-btn"
+                dataRecipe={ dataRecipe }
+                isFav={ isFav }
+                favRecipe={ this.favRecipe }
+              />
             </div>
             <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
           </div>

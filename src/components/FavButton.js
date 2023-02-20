@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import whiteHeartIcon from '../style/images/like.png';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 class FavButton extends React.Component {
   addToFavorite = () => {
-    const { dataRecipe } = this.props;
+    const { dataRecipe, favRecipe } = this.props;
     const { id,
       type,
       category,
@@ -26,17 +26,28 @@ class FavButton extends React.Component {
     };
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes, obj]));
+    favRecipe();
+  };
+
+  removeFav = () => {
+    const { idRecipe, dataRecipe, datatestid, favRecipe } = this.props;
+    const id = datatestid === 'favorite-btn' ? dataRecipe.id : idRecipe;
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const newData = favoriteRecipes.filter((data) => data.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newData));
+    favRecipe(newData);
   };
 
   render() {
+    const { isFav, datatestid } = this.props;
     return (
       <button
         type="button"
-        onClick={ this.addToFavorite }
+        onClick={ isFav ? this.removeFav : this.addToFavorite }
       >
         <img
-          data-testid="favorite-btn"
-          src={ whiteHeartIcon }
+          data-testid={ datatestid }
+          src={ isFav ? blackHeartIcon : whiteHeartIcon }
           alt="favortitar"
         />
       </button>
@@ -54,6 +65,10 @@ FavButton.propTypes = {
     nationality: PropTypes.string,
     type: PropTypes.string,
   }).isRequired,
+  isFav: PropTypes.bool.isRequired,
+  favRecipe: PropTypes.func.isRequired,
+  datatestid: PropTypes.string.isRequired,
+  idRecipe: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

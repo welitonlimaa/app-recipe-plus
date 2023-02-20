@@ -1,22 +1,26 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { updateRoute } from '../redux/actions/actions';
-import done from '../style/images/done.png';
-import logout from '../style/images/Logout.png';
 
 class Profile extends React.Component {
   state = {
     pathname: '/profile',
+    user: 'email@email.com',
   };
 
   componentDidMount() {
     const { dispatch } = this.props;
     const { pathname } = this.state;
     dispatch(updateRoute(pathname));
+    if ((JSON.parse(localStorage.getItem('user'))) !== null) {
+      const user = (JSON.parse(localStorage.getItem('user'))).email;
+      this.setState({
+        user,
+      });
+    }
   }
 
   changeRoute = (route) => {
@@ -26,29 +30,42 @@ class Profile extends React.Component {
 
   render() {
     const { history } = this.props;
-    const user = JSON.parse(localStorage.getItem('user')) || '';
+    const { user } = this.state;
     return (
-      <div className="text-center">
+      <>
         <Header
           history={ history }
         />
-        <h4 className="fw-bold">{user.email}</h4>
-        <div className="d-flex flex-column menu">
-          <Link to="/done-recipes">
-            <img
-              src={ done }
-              alt="link to done recipes"
-            />
-          </Link>
-          <Link to="/">
-            <img
-              src={ logout }
-              alt="logout"
-            />
-          </Link>
-        </div>
+        <h3 data-testid="profile-email">{user}</h3>
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+          onClick={ () => history.push('done-recipes') }
+        >
+          Done Recipes
+
+        </button>
+        <button
+          type="button"
+          data-testid="profile-favorite-btn"
+          onClick={ () => history.push('favorite-recipes') }
+        >
+          Favorite Recipes
+
+        </button>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ () => {
+            // localStorage.clear();
+            history.push('/');
+          } }
+        >
+          Logout
+
+        </button>
         <Footer changeRoute={ this.changeRoute } />
-      </div>
+      </>
     );
   }
 }

@@ -22,4 +22,30 @@ describe('Testes para pagina Profile', () => {
     const a = screen.getByTestId('page-title');
     expect(a).toBeInTheDocument();
   });
+  test('Testa se a pagina Profile exibe o email', () => {
+    renderWithRouterAndRedux(<App />, '/profile');
+    const email = screen.getByTestId('profile-email');
+    expect(email).toBeInTheDocument();
+  });
+  test('Testa se a pagina Profile possui um botão para acessar done Recipes', () => {
+    const { history } = renderWithRouterAndRedux(<App />, '/profile');
+    const doneBtn = screen.getByTestId('profile-done-btn');
+    expect(doneBtn).toBeInTheDocument();
+    userEvent.click(doneBtn);
+    expect(history.location.pathname).toBe('/done-recipes');
+  });
+  test('Testa se a pagina Profile possui um botão para acessar favorite Recipes', () => {
+    const { history } = renderWithRouterAndRedux(<App />, '/profile');
+    const favBtn = screen.getByTestId('profile-favorite-btn');
+    expect(favBtn).toBeInTheDocument();
+    userEvent.click(favBtn);
+    expect(history.location.pathname).toBe('/favorite-recipes');
+  });
+  test('Testa se a pagina Profile possui um botão para fazer o logout', () => {
+    const { history } = renderWithRouterAndRedux(<App />, '/profile');
+    const logoutBtn = screen.getByTestId('profile-logout-btn');
+    expect(logoutBtn).toBeInTheDocument();
+    userEvent.click(logoutBtn);
+    expect(history.location.pathname).toBe('/');
+  });
 });
