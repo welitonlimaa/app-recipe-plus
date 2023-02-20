@@ -173,9 +173,19 @@ button {
 
 .menu {
   margin-top: 100px;
+  width: 100%;
+  display: absolute;
 }
 
-.menu img {
-  width: 60%;
-  margin-top: 25px;
+.menu button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px;
+  font-size: larger;
+  font-weight: 700;
+}
+
+.menu button img {
+  width: 60px;
 }
