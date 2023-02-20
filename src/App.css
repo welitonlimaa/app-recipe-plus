@@ -64,10 +64,17 @@ h2 {
 }
 
 .details-subheader div {
-  text-align: right;
   width: 100%;
   padding: 20px;
-  /* background-color: blue; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-weight: 500;
+}
+
+.details-subheader div img {
+  filter: invert(90%) sepia(37%) saturate(4906%) hue-rotate(326deg) brightness(99%) contrast(100%);
 }
 
 .details-subheader h1 {
