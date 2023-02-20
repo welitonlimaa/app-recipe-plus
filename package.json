@@ -19,7 +19,7 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2"
   },
-  "homepage": "https://yourgithubname.github.io/app-recipe-plus",
+  "homepage": "https://welitonlimaa.github.io/app-recipe-plus",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
