@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/app-recipe-plus/static/css/main.ca2be8f1.css",
+    "main.js": "/app-recipe-plus/static/js/main.fab6e19d.js",
+    "static/media/artlogin.png": "/app-recipe-plus/static/media/artlogin.8952028a0b04a4f7f9ef.png",
+    "static/media/shareIcon.svg": "/app-recipe-plus/static/media/shareIcon.87def1bd1dff9af9263f046c3b9bd31a.svg",
+    "static/media/whiteHeartIcon.svg": "/app-recipe-plus/static/media/whiteHeartIcon.2b822118952dc5140129c6349fcd0472.svg",
+    "static/media/blackHeartIcon.svg": "/app-recipe-plus/static/media/blackHeartIcon.083cb006913d197c95857ebfa2161db7.svg",
+    "index.html": "/app-recipe-plus/index.html",
+    "main.ca2be8f1.css.map": "/app-recipe-plus/static/css/main.ca2be8f1.css.map",
+    "main.fab6e19d.js.map": "/app-recipe-plus/static/js/main.fab6e19d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca2be8f1.css",
+    "static/js/main.fab6e19d.js"
+  ]
+}
