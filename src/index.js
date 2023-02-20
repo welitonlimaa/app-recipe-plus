@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM
   .createRoot(document.getElementById('root'))
   .render(
-    <BrowserRouter basename={ process.env.PUBLIC_URL }>
+    <BrowserRouter>
       <Provider store={ store }>
         <App />
       </Provider>
