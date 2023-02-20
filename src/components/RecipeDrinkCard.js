@@ -7,12 +7,18 @@ class RecipeDrinkCard extends React.Component {
     const { dataDrink, id } = this.props;
     const { strDrinkThumb, strDrink, idDrink } = dataDrink;
     return (
-      <Link to={ `/drinks/${idDrink}` }>
-        <div className="recipe-card" data-testid={ `${id}-recipe-card` }>
+      <div className="recipe-card" data-testid={ `${id}-recipe-card` }>
+        <Link to={ `/drinks/${idDrink}` }>
           <img src={ strDrinkThumb } alt={ strDrink } data-testid={ `${id}-card-img` } />
-          <p data-testid={ `${id}-card-name` }>{strDrink}</p>
-        </div>
-      </Link>
+          <p
+            className="h5"
+            data-testid={ `${id}-card-name` }
+          >
+            {strDrink}
+
+          </p>
+        </Link>
+      </div>
     );
   }
 }

@@ -9,7 +9,10 @@ class MealSuggestionCard extends Component {
     const { strMealThumb, strMeal, idMeal } = dataMeal;
     return (
       <Link to={ `/meals/${idMeal}` }>
-        <div className="content-recipe" data-testid={ `${id}-recommendation-card` }>
+        <div
+          data-testid={ `${id}-recommendation-card` }
+          className="recipe-card text-center"
+        >
           <img
             src={ strMealThumb }
             alt={ strMeal }

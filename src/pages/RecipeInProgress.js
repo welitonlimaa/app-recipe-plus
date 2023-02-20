@@ -61,7 +61,13 @@ class RecipeInProgress extends React.Component {
   };
 
   doneRecipe = (data) => {
-    const date = new Date();
+    const options = {
+      year: '2-digit',
+      month: 'numeric',
+      day: 'numeric',
+    };
+    const newDate = new Date();
+    const date = newDate.toLocaleDateString('pt-br', options);
     const { id,
       type,
       category,
@@ -82,7 +88,7 @@ class RecipeInProgress extends React.Component {
       image,
       tags,
       alcoholicOrNot,
-      doneDate: date.toISOString(),
+      doneDate: date,
     };
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipes, obj]));
@@ -130,33 +136,51 @@ class RecipeInProgress extends React.Component {
     const dataRecipe = this.variablePattern();
 
     return (
-      <div>
-        <ShareButton datatestid="share-btn" type={ type } idRecipe={ idRecipe } />
-        <FavButton
-          datatestid="favorite-btn"
-          dataRecipe={ dataRecipe }
-          isFav={ isFav }
-          favRecipe={ this.favRecipe }
-        />
-        <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
-        <img
-          src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
-          alt="Foto da receita"
-          width="300px"
-          height="300px"
-          data-testid="recipe-photo"
-        />
-        { route.includes('drinks')
-          ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
-          : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
-        <IngredientsCheckbox history={ history } handleDisabled={ this.handleDisabled } />
-        <section>
-          <h3>Instruções</h3>
-          <p data-testid="instructions">{recipe.strInstructions}</p>
-        </section>
-        <Link to="/done-recipes">
+      <div className="container-fluid">
+        <div className="fixed-top details-header">
+          <div className="details-subheader">
+            <div>
+              <ShareButton datatestid="share-btn" type={ type } idRecipe={ idRecipe } />
+              <FavButton
+                datatestid="favorite-btn"
+                dataRecipe={ dataRecipe }
+                isFav={ isFav }
+                favRecipe={ this.favRecipe }
+              />
+            </div>
+            <h1 data-testid="recipe-title">{dataRecipe.name}</h1>
+          </div>
+          <img
+            src={ route.includes('meals') ? recipe.strMealThumb : recipe.strDrinkThumb }
+            alt="Foto da receita"
+            width="300px"
+            height="300px"
+            data-testid="recipe-photo"
+          />
+        </div>
+        <div className="container details-content">
+          { route.includes('drinks')
+            ? <h3 data-testid="recipe-category">{ recipe.strAlcoholic }</h3>
+            : <h3 data-testid="recipe-category">{recipe.strCategory}</h3> }
+          <h2 className="fw-bold">Ingredients</h2>
+          <IngredientsCheckbox
+            history={ history }
+            handleDisabled={ this.handleDisabled }
+          />
+          <h2 className="fw-bold">Instructions</h2>
+          <div className="infos">
+            <p data-testid="instructions">{recipe.strInstructions}</p>
+          </div>
+        </div>
+        <Link
+          to="/done-recipes"
+          className="footer text-center fixed-bottom
+        container-button p-4"
+        >
           <button
             type="button"
+            className="btn btn-primary btn-lg"
+            id="finish-button"
             data-testid="finish-recipe-btn"
             disabled={ isDisabled }
             onClick={ () => this.doneRecipe(dataRecipe) }

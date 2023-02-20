@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import artlogin from '../style/images/artlogin.png';
 
 class Login extends React.Component {
   state = {
@@ -32,31 +33,49 @@ class Login extends React.Component {
   render() {
     const { email, password } = this.state;
     return (
-      <form>
-        <h1>login</h1>
-        <input
-          type="text"
-          data-testid="email-input"
-          onChange={ this.handleChange }
-          name="email"
-          value={ email }
+      <div className="container-fluid">
+        <img
+          className="navbar"
+          src={ artlogin }
+          alt="art"
         />
-        <input
-          type="password"
-          data-testid="password-input"
-          name="password"
-          value={ password }
-          onChange={ this.handleChange }
-        />
-        <button
-          type="button"
-          data-testid="login-submit-btn"
-          disabled={ !this.isValid() }
-          onClick={ this.handleClick }
-        >
-          Enter
-        </button>
-      </form>
+        <main className="text-center w-100">
+          <form className="d-grid gap-2 login-container">
+            <h1 className="display-6">Login</h1>
+            <label htmlFor="email" className="form-label d-block">
+              <input
+                type="text"
+                id="email"
+                className="form-control"
+                data-testid="email-input"
+                onChange={ this.handleChange }
+                name="email"
+                value={ email }
+              />
+            </label>
+            <label htmlFor="password" className="form-label d-block">
+              <input
+                type="password"
+                className="form-control"
+                data-testid="password-input"
+                id="password"
+                name="password"
+                value={ password }
+                onChange={ this.handleChange }
+              />
+            </label>
+            <button
+              className="btn btn-secondary"
+              type="button"
+              data-testid="login-submit-btn"
+              disabled={ !this.isValid() }
+              onClick={ this.handleClick }
+            >
+              Enter
+            </button>
+          </form>
+        </main>
+      </div>
     );
   }
 }

@@ -51,8 +51,8 @@ class RecipeSuggestion extends Component {
     // const { mealsSuggestionArray, drinksSuggestionArray } = this.state;
     const { route } = this.props;
     return (
-      <>
-        <span>Sugestão de receitas</span>
+      <div>
+        <h2 className="fw-bold">Recommended</h2>
         <div className="carrousel">
           {route.split('/')[1] === 'drinks' ? (
             this.saveMealsSuggestionArray().map((recipe, index) => (
@@ -73,7 +73,7 @@ class RecipeSuggestion extends Component {
             ))
           )}
         </div>
-      </>
+      </div>
     );
   }
 }

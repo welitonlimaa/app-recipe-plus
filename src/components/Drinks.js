@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import { fetchDrinkCategory, fetchResetDB } from '../redux/actions/actions';
 import RecipeDrinkCard from './RecipeDrinkCard';
 import RecipeNotFound from './RecipeNotFound';
+import alldrinks from '../style/images/alldrinks.png';
+import cocoa from '../style/images/cocoa.png';
+import shake from '../style/images/shake.png';
+import categorydrink from '../style/images/categorydrink.png';
+import other from '../style/images/other.png';
+import cocktail from '../style/images/cocktail.png';
 
 class Drinks extends React.Component {
   state = {
@@ -45,32 +51,43 @@ class Drinks extends React.Component {
       redirectForRecipe(route);
     }
 
+    const imgCategorys = [categorydrink, cocktail, shake, other, cocoa];
+
     return (
-      <div>
-        <h1>Drinks</h1>
-        <div>
+      <div className="text-center">
+        <div className="d-flex justify-content-center flex-wrap mt-4">
           <button
             type="button"
+            className="d-flex flex-column align-items-center btn-categorys"
             data-testid="All-category-filter"
             onClick={ () => this.getAllDrinks('All') }
           >
+            <img
+              src={ alldrinks }
+              alt="all"
+            />
             All
           </button>
           {
             categorys.map((category, index) => (
               <button
                 type="button"
+                className="d-flex flex-column align-items-center btn-categorys"
                 key={ index }
                 data-testid={ `${category}-category-filter` }
                 onClick={ () => this.getByCategory(category) }
               >
+                <img
+                  src={ imgCategorys[index] }
+                  alt={ category }
+                />
                 {category}
                 {' '}
               </button>
             ))
           }
         </div>
-        <div>
+        <div className="d-flex justify-content-around flex-wrap mt-4">
           { dataDrinks.map((meal, index) => (
             <RecipeDrinkCard
               key={ index }

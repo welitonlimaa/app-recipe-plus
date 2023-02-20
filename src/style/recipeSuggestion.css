@@ -4,11 +4,10 @@
 }
 
 .carrousel {
-  border: black 1px solid;
   display: flex;
   flex-flow: nowrap;
   overflow-x: auto;
-  width: 360px;
+  width: 100%;
 }
 
 .content-recipe {

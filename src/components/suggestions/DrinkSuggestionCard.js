@@ -11,7 +11,7 @@ class DrinkSuggestionCard extends React.Component {
       <Link to={ `/drinks/${idDrink}` }>
         <div
           data-testid={ `${id}-recommendation-card` }
-          className="content-recipe"
+          className="recipe-card text-center"
         >
           <img
             src={ strDrinkThumb }

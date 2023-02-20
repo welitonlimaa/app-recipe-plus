@@ -26,18 +26,22 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <form>
+      <form className="search-container text-center">
         <input
           type="text"
+          className="form-control"
           data-testid="search-input"
           name="searchInput"
           onChange={ this.handleChange }
         />
-        <br />
-        <fieldset>
-          <label htmlFor="ingredient">
+        <div className="form-check form-check-inline">
+          <label
+            htmlFor="ingredient"
+            className="form-check-label"
+          >
             <input
               type="radio"
+              className="form-check-input"
               value="ingredient"
               id="ingredient"
               name="searchRadio"
@@ -46,9 +50,15 @@ class SearchBar extends Component {
             />
             Ingrediente
           </label>
-          <label htmlFor="Name">
+        </div>
+        <div className="form-check form-check-inline">
+          <label
+            htmlFor="Name"
+            className="form-check-label"
+          >
             <input
               type="radio"
+              className="form-check-input"
               value="name"
               id="Name"
               name="searchRadio"
@@ -57,9 +67,15 @@ class SearchBar extends Component {
             />
             Nome
           </label>
-          <label htmlFor="First letter">
+        </div>
+        <div className="form-check form-check-inline">
+          <label
+            htmlFor="First letter"
+            className="form-check-label"
+          >
             <input
               type="radio"
+              className="form-check-input"
               value="First letter"
               id="First letter"
               name="searchRadio"
@@ -68,9 +84,11 @@ class SearchBar extends Component {
             />
             Primeira Letra
           </label>
-        </fieldset>
+
+        </div>
         <button
           type="button"
+          className="btn btn-secondary"
           data-testid="exec-search-btn"
           onClick={ this.handleClick }
         >

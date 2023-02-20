@@ -1,13 +1,17 @@
-.recipe-card img {
-  width: 150px;
+.recipe-card {
+  width: 180px;
+  margin: 10px;
 }
 
-.startbtn {
+.recipe-card img {
+  width: 100%;
+}
+
+/* .startbtn {
   bottom: 0;
   position: fixed;
-}
+} */
 
 .ingred-checkded {
   text-decoration: line-through solid black;
 }
-
