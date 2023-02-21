@@ -1,8 +1,9 @@
-#App de Receitas 
+# App de Receitas 
 
 Nele será possível: ver, buscar, filtrar, favoritar e acompanhar o progresso de preparação de receitas de comidas e bebidas!
 O layout tem como foco dispositivos móveis, dessa forma foi desenvolvido para telas menores.
 
+![Captura de tela de 2023-02-21 10-47-02](https://user-images.githubusercontent.com/108986668/220363108-6c3cc90b-080e-4947-b244-de0f83e7e9c2.png)
 
 <details>
   <summary><strong>:memo: Habilidades Envolvidas </strong></summary><br />
