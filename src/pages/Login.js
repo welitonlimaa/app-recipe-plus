@@ -4,8 +4,8 @@ import artlogin from '../style/images/artlogin.png';
 
 class Login extends React.Component {
   state = {
-    email: '',
-    password: '',
+    email: 'test@test.com',
+    password: '12345678',
   };
 
   isValid = () => {
