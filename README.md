@@ -1,13 +1,49 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# App Recipe Plus
+App Recipe Plus é um aplicativo de receitas que permite visualizar, buscar, filtrar, favoritar e acompanhar o progresso de preparação de receitas de comidas e bebidas. O aplicativo consolida informações de duas APIs distintas, uma para comidas e outra para bebidas.
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+## Tecnologias Utilizadas
+* React
+* Redux
+* APIs
+* Bootstrap
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+## APIs utilizadas
+* TheMealDB
+* TheCocktailDB
+
+## Funcionalidades
+* Visualizar receitas de comidas e bebidas
+* Buscar receitas por nome ou primeiro ingrediente
+* Filtrar receitas por categoria, área (para receitas de comidas) e tipo (para receitas de bebidas)
+* Favoritar receitas
+* Acompanhar o progresso de preparação de receitas
+* Visualizar detalhes de receitas, como ingredientes e instruções de preparação
+
+## Como Utilizar
+### Home
+Ao abrir o aplicativo, você será direcionado para a tela inicial, onde pode visualizar as últimas receitas adicionadas ao aplicativo. 
+Você pode navegar pelas diferentes categorias de receitas na barra de navegação superior. Para buscar uma receita específica, utilize o campo de busca na barra de navegação superior.
+
+### Receita
+Clique em uma receita para visualizar seus detalhes. Aqui você pode visualizar a lista de ingredientes, instruções de preparação e outras informações relevantes. Se você gostou da receita, pode favoritá-la clicando no ícone de coração.
+
+### Favoritos
+Para visualizar todas as suas receitas favoritas, clique na guia "Favoritos" na barra de navegação superior. Aqui você pode visualizar todas as suas receitas favoritas e removê-las da lista se desejar.
+
+### Progresso
+Para acompanhar o progresso de preparação de uma receita, clique na guia "Progresso" na barra de navegação superior. Aqui você pode visualizar todas as suas receitas em andamento e atualizar seu progresso conforme necessário.
+
+## Screenshots
+
+## Como Instalar e Executar
+1. Clone o repositório do Github:
+git clone https://github.com/welitonlimaa/app-recipe-plus.git
+
+2. Acesse a pasta do projeto:
+cd app-recipe-plus
+
+3. Instale as dependências do projeto:
+npm install
+
+4. Inicie o aplicativo:
+npm start
