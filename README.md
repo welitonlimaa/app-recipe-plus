@@ -11,6 +11,8 @@ App Recipe Plus é um aplicativo de receitas que permite visualizar, buscar, fil
 * TheMealDB
 * TheCocktailDB
 
+## Screenshots
+
 ## Funcionalidades
 * Visualizar receitas de comidas e bebidas
 * Buscar receitas por nome ou primeiro ingrediente
@@ -33,17 +35,21 @@ Para visualizar todas as suas receitas favoritas, clique na guia "Favoritos" na 
 ### Progresso
 Para acompanhar o progresso de preparação de uma receita, clique na guia "Progresso" na barra de navegação superior. Aqui você pode visualizar todas as suas receitas em andamento e atualizar seu progresso conforme necessário.
 
-## Screenshots
-
 ## Como Instalar e Executar
+
 1. Clone o repositório do Github:
+```bash
 git clone https://github.com/welitonlimaa/app-recipe-plus.git
-
+```
 2. Acesse a pasta do projeto:
+```bash
 cd app-recipe-plus
-
+```
 3. Instale as dependências do projeto:
+```bash
 npm install
-
+```
 4. Inicie o aplicativo:
+```bash
 npm start
+```
