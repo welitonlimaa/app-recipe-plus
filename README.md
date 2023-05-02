@@ -13,6 +13,8 @@ App Recipe Plus é um aplicativo de receitas que permite visualizar, buscar, fil
 
 ## Screenshots
 
+![telas](https://user-images.githubusercontent.com/108986668/235554449-68e7340d-486c-4b0d-beea-c944b642e411.png)
+
 ## Funcionalidades
 * Visualizar receitas de comidas e bebidas
 * Buscar receitas por nome ou primeiro ingrediente
